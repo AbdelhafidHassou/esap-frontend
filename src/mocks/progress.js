@@ -55,3 +55,12 @@ export const dashboardStats = {
   modulesValidated: 1,
   modulesInProgress: 1,
 }
+
+export const progressOverTime = [
+  { month: "Jan", score: 10 },
+  { month: "Fév", score: 25 },
+  { month: "Mar", score: 30 },
+  { month: "Avr", score: 45 },
+  { month: "Mai", score: 55 },
+  { month: "Juin", score: 62 },
+]

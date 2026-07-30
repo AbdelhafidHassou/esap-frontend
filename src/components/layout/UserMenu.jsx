@@ -23,24 +23,27 @@ export default function UserMenu({ firstName, lastName, email }) {
                     <span>{firstName} {lastName}</span>
                     <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="w-56 rounded-sm">
                     <DropdownMenuGroup>
-                        <DropdownMenuLabel className="text-muted-foreground text-sm font-normal">
-                            {email}
+                        <DropdownMenuLabel className="font-normal">
+                            <div className="grid flex-1 text-left text-sm leading-tight">
+                                <span className="truncate font-medium text-black">{firstName} {lastName}</span>
+                                <span className="text-muted-foreground truncate text-xs">{email}</span>
+                            </div>
                         </DropdownMenuLabel>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => navigate("/account")}>
+                        <DropdownMenuItem onClick={() => navigate("/account")} className="transition-colors duration-300 ease-in-out">
                             <User className="h-4 w-4" /> Mon compte
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => navigate("/support")}>
+                        <DropdownMenuItem onClick={() => navigate("/support")} className="transition-colors duration-300 ease-in-out">
                             <LifeBuoy className="h-4 w-4" /> Support
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => setConfirmOpen(true)}>
+                        <DropdownMenuItem onClick={() => setConfirmOpen(true)} className="transition-colors duration-300 ease-in-out">
                             <LogOut className="h-4 w-4" /> Se déconnecter
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
@@ -48,7 +51,7 @@ export default function UserMenu({ firstName, lastName, email }) {
             </DropdownMenu>
 
             <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-                <AlertDialogContent>
+                <AlertDialogContent className="rounded-sm">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Se déconnecter ?</AlertDialogTitle>
                         <AlertDialogDescription>
@@ -56,8 +59,8 @@ export default function UserMenu({ firstName, lastName, email }) {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Annuler</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => navigate("/login")}>
+                        <AlertDialogCancel className="rounded-sm transition-colors duration-300 ease-in-out">Annuler</AlertDialogCancel>
+                        <AlertDialogAction className="rounded-sm transition-colors duration-300 ease-in-out bg-[#7b2cbf] hover:bg-[#c77dff]" onClick={() => navigate("/login")}>
                             Se déconnecter
                         </AlertDialogAction>
                     </AlertDialogFooter>
