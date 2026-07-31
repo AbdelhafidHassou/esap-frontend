@@ -32,8 +32,8 @@ export default function AppSidebar() {
                         <SidebarMenuButton
                             size="lg"
                             render={<Link to="/dashboard" />}
-                            className="bg-[#f3e8ff] hover:bg-[#f3e8ff]"
-                            
+                            className="bg-white hover:bg-white"
+
                         >
                             {branding?.logoUrl ? (
                                 <img
@@ -48,7 +48,7 @@ export default function AppSidebar() {
                             )}
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-medium text-black">{branding?.name}</span>
-                                <span className="text-muted-foreground truncate text-xs">Formation SSI</span>
+                                <span className="text-primary truncate text-xs">Formation SSI</span>
                             </div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -56,17 +56,17 @@ export default function AppSidebar() {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupContent>
+                    <SidebarGroupContent className="overflow-hidden">
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.url}>
                                     <SidebarMenuButton
                                         render={<Link to={item.url} />}
                                         isActive={pathname === item.url}
-                                        className="mb-1 transition-colors duration-300 ease-in-out"
+                                        className="mb-1 w-full min-w-0 transition-colors duration-300 ease-in-out"
                                     >
                                         <item.icon />
-                                        <span>{item.title}</span>
+                                        <span className="truncate">{item.title}</span>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -75,18 +75,9 @@ export default function AppSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="p-4 group-data-[collapsible=icon]:p-2">
-                <div className="flex flex-col items-center gap-2 border-t  pt-4">
-                    {platform?.logoUrl && (
-                        <a href={platform?.websiteUrl} target="_blank">
-                            <img
-                                src={platform.logoUrl}
-                                alt={platform.name}
-                                className="h-12 w-auto object-contain"
-                            />
-                        </a>
-                    )}
-                    <p className="text-center text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">
-                        © {platform?.year} {branding?.name} - Developed by {platform?.name}
+                <div className="flex flex-col items-center border-t pt-4">
+                    <p className="text-center text-xs text-gray-50 group-data-[collapsible=icon]:hidden">
+                        © {platform?.year} {branding?.name} - Developed by <a href="https://www.linkedin.com/company/mercure-one" target="_blank" className="hover:text-[#7b2cbf] transition duration-300 ease-in-out">{platform?.name}</a>
                     </p>
                 </div>
             </SidebarFooter>

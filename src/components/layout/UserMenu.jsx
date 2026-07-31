@@ -60,7 +60,7 @@ export default function UserMenu({ firstName, lastName, email }) {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel className="rounded-sm transition-colors duration-300 ease-in-out">Annuler</AlertDialogCancel>
-                        <AlertDialogAction className="rounded-sm transition-colors duration-300 ease-in-out bg-[#7b2cbf] hover:bg-[#c77dff]" onClick={() => navigate("/login")}>
+                        <AlertDialogAction className="rounded-sm transition-colors duration-300 ease-in-out bg-primary hover:bg-primary/90" onClick={() => navigate("/login")}>
                             Se déconnecter
                         </AlertDialogAction>
                     </AlertDialogFooter>

@@ -5,19 +5,19 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
 const STATUS_CONFIG = {
-  not_started: { label: "Non commencée", className: "bg-gray-100 text-gray-700" },
-  in_progress: { label: "En cours", className: "bg-[#f3e8ff] text-[#7b2cbf]" },
-  awaiting_final_test: { label: "En attente du test", className: "bg-amber-100 text-amber-700" },
-  awaiting_ssi: { label: "En attente SSI", className: "bg-amber-100 text-amber-700" },
-  validated: { label: "Validée", className: "bg-green-100 text-green-700" },
-  failed: { label: "Échouée", className: "bg-red-100 text-red-700" },
+  not_started:         { label: "Non commencée", className: "bg-[#f3e8ff] text-[#64748b]" },
+  in_progress:         { label: "En cours", className: "bg-[#fef3c7] text-[#f59e0b]" },
+  awaiting_final_test: { label: "En attente du test", className: "bg-[#fef3c7] text-[#f59e0b]" },
+  awaiting_ssi:        { label: "En attente SSI", className: "bg-[#fef3c7] text-[#f59e0b]" },
+  validated:           { label: "Validée", className: "bg-[#d1fae5] text-[#10b981]" },
+  failed:              { label: "Échouée", className: "bg-[#fee2e2] text-[#ef4444]" },
 }
 
 export default function FormationsTable({ formations = [] }) {
   return (
-    <Card className="rounded-sm bg-white shadow-lg  ">
+    <Card className="rounded-sm bg-card shadow-lg min-w-0">
       <CardContent className="p-6">
-        <p className="text-[#7b2cbf] mb-4 text-lg font-semibold">Mes formations</p>
+        <p className="text-primary mb-4 text-lg font-semibold">Mes formations</p>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>

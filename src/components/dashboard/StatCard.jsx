@@ -1,16 +1,30 @@
 import { Card, CardContent } from "../ui/card";
 
-export default function StatCard({ label, value, icon: Icon, accent = "" }) {
+export default function StatCard({ label, value, subtitle, icon: Icon, accent, progress }) {
     return (
-        <Card className="rounded-sm bg-white shadow-lg  ">
-            <CardContent className="flex flex-col items-center gap-4">
-                <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${accent}`}>
-                    <Icon className="h-6 w-6" />
+        <Card className="rounded-sm bg-card shadow-lg min-w-0">
+            <CardContent className="flex flex-col gap-4 p-5">
+                <div className="flex items-center gap-4">
+                    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${accent}`}>
+                        <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex flex-1 flex-col min-w-0">
+                        <p className="text-muted-foreground text-xs">{label}</p>
+                        <p className="text-2xl font-bold text-foreground">{value}</p>
+                    </div>
                 </div>
-                <div className="flex flex-1 flex-col items-center gap-2">
-                    <p className="text-muted-foreground text-base text-end">{label}</p>
-                    <p className="text-4xl font-semibold text-end">{value}</p>
-                </div>
+
+                {progress != null && (
+                    <div>
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                            <div
+                                className={`h-full rounded-full ${accent}`}
+                                style={{ width: `${Math.min(progress, 100)}%` }}
+                            />
+                        </div>
+                        {subtitle && <p className="text-muted-foreground text-xs mt-2">{subtitle}</p>}
+                    </div>
+                )}
             </CardContent>
         </Card>
     )
