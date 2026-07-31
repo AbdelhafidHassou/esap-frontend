@@ -11,5 +11,6 @@ export const employee = {
 export const clientBranding = {
     name: "SGTM",
     logoUrl: logo_branding,
-    primaryColor: "#fab128"
+    primaryColor: "#333536",
+    secondaryColor: "#e8a035",
 }
