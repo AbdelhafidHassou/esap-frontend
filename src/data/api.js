@@ -48,7 +48,7 @@ export async function getDepartments() {
 
 export async function getDepartment(departmentId) {
   await delay();
-  return departments.map((d) => d.id === departmentId) ?? null;
+  return departments.find((d) => d.id === departmentId) ?? null;
 }
 
 export async function getProgress() {
@@ -69,4 +69,34 @@ export async function getSsiDocuments() {
 export async function getPlatform() {
   await delay();
   return platform;
+}
+
+function deriveModuleStatus(module) {
+  const chapterStates = module.chapters.map((ch) => chapterProgress[ch.id]);
+  const quizPassed = quizProgress[module.quiz.id]?.passed ?? false;
+
+  const allChapterCompleted = chapterStates.every((s) => s === "completed");
+  const allChapterLocked = chapterStates.every((s) => s === "locked");
+
+  if (allChapterCompleted && quizPassed) return "completed";
+  if (allChapterLocked) return "locked";
+
+  return "in_progress";
+}
+
+export function getFormationsView() {
+  return departments.map((dep) => ({
+    department: { id: dep.id, name: dep.name },
+    modules: dep.modules.map((mod) => ({
+      id: mod.id,
+      title: mod.title,
+      description: mod.description,
+      image: mod.imageUrl,
+      chapterCount: mod.chapters.length,
+      durationMinutes: Math.ceil(
+        mod.chapters.reduce((sum, ch) => sum + ch.durationSeconds, 0) / 60
+      ),
+      status: deriveModuleStatus(mod),
+    })),
+  }));
 }

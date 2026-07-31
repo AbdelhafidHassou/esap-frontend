@@ -7,7 +7,7 @@ export const departments = [
         id: "mod_it_1",
         title: "Reconnaître le phishing",
         description: "Identifier les e-mails frauduleux et les pièges courants.",
-        imageUrl: "/mock/phishing.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1654588831193-0285dab84d5a?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 1,
         readingTimerSeconds: 180,
         chapters: [
@@ -21,7 +21,7 @@ export const departments = [
         id: "mod_it_2",
         title: "Mots de passe robustes",
         description: "Créer et gérer des mots de passe sûrs.",
-        imageUrl: "/mock/passwords.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1762330472502-83efbe1d4478?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 2,
         readingTimerSeconds: 180,
         chapters: [
@@ -35,7 +35,7 @@ export const departments = [
         id: "mod_it_3",
         title: "Ingénierie sociale",
         description: "Comprendre les manipulations humaines.",
-        imageUrl: "/mock/social.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 3,
         readingTimerSeconds: 180,
         chapters: [
@@ -56,7 +56,7 @@ export const departments = [
         id: "mod_hr_1",
         title: "Fraude au président (BEC)",
         description: "Détecter les arnaques par usurpation de dirigeant.",
-        imageUrl: "/mock/bec.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1674049404913-2005c02245fa?q=80&w=762&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 1,
         readingTimerSeconds: 180,
         chapters: [
@@ -70,7 +70,7 @@ export const departments = [
         id: "mod_hr_2",
         title: "Protection des données personnelles",
         description: "Manipuler les données RH en conformité.",
-        imageUrl: "/mock/data.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1762330465065-af76f23809db?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 2,
         readingTimerSeconds: 180,
         chapters: [
@@ -84,7 +84,7 @@ export const departments = [
         id: "mod_hr_3",
         title: "Sécurité au quotidien",
         description: "Bureau propre, écrans verrouillés, vigilance.",
-        imageUrl: "/mock/daily.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1751448555253-f39c06e29d82?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         order: 3,
         readingTimerSeconds: 180,
         chapters: [
