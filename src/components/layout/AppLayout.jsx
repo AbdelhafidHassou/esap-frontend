@@ -11,7 +11,7 @@ export default function AppLayout() {
     return (
         <SidebarProvider>
             <AppSidebar />
-            <div className="flex flex-1 flex-col">
+            <div className="flex flex-1 flex-col min-w-0">
                 <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-white px-4">
                     <SidebarTrigger />
                     <div className="hidden md:block flex-1 max-w-md">

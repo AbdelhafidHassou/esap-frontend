@@ -97,6 +97,15 @@ export function getFormationsView() {
         mod.chapters.reduce((sum, ch) => sum + ch.durationSeconds, 0) / 60
       ),
       status: deriveModuleStatus(mod),
+      progressPercent: computeProgressPercent(mod),
     })),
   }));
+}
+
+function computeProgressPercent(module) {
+  const total = module.chapters.length;
+  const done = module.chapters.filter(
+    (ch) => chapterProgress[ch.id] === "completed"
+  ).length;
+  return Math.round((done / total) * 100);
 }
