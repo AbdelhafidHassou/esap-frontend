@@ -12,7 +12,7 @@ export default function AppLayout() {
         <SidebarProvider>
             <AppSidebar />
             <div className="flex flex-1 flex-col min-w-0">
-                <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-white px-4">
+                <header className="sticky top-0 z-90 flex h-14 items-center gap-4 border-b bg-white px-4">
                     <SidebarTrigger />
                     <div className="hidden md:block flex-1 max-w-md">
                         <SearchBar />

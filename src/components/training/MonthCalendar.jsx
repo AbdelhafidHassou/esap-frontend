@@ -9,7 +9,7 @@ export function MonthCalendar() {
       selected={new Date()}
       onSelect={new Date()}
       locale={fr}
-      className="hidden lg:block w-full rounded-sm border border-border"
+      className="hidden lg:block w-full rounded-sm"
       captionLayout="dropdown"
     />
   )
