@@ -7,7 +7,7 @@ import {
     DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu"
 import {
-    AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader,
+    AlertDialog, AlertDialogContent, AlertDialogHeader,
     AlertDialogTitle, AlertDialogDescription, AlertDialogFooter,
     AlertDialogCancel, AlertDialogAction,
 } from "@/components/ui/alert-dialog"

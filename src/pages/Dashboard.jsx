@@ -66,7 +66,7 @@ export default function Dashboard() {
               </p>
               <button
                 onClick={() => navigate("/formation/mod_it_2")}
-                className="mt-6 inline-flex items-center gap-2 rounded-md bg-white px-5 py-2.5 font-medium text-primary transition-colors hover:bg-white/90"
+                className="mt-6 inline-flex items-center gap-2 rounded-sm bg-white px-5 py-2.5 font-medium text-primary transition-colors hover:bg-white/ cursor-pointer"
               >
                 Reprendre la formation <ArrowRight className="h-4 w-4" />
               </button>

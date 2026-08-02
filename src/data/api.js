@@ -109,3 +109,20 @@ function computeProgressPercent(module) {
   ).length;
   return Math.round((done / total) * 100);
 }
+
+
+export async function requestOtp(email) {
+  await delay();
+  return { success: true };
+}
+
+export async function verifyOtp(email, code) {
+  await delay();
+  if (code === "123456") {
+    return {
+      success: true,
+      token: "mock-token",
+    };
+  }
+  return { success: false };
+}

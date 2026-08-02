@@ -77,7 +77,7 @@ export default function AppSidebar() {
             <SidebarFooter className="p-4 group-data-[collapsible=icon]:p-2">
                 <div className="flex flex-col items-center border-t pt-4">
                     <p className="text-center text-xs text-gray-50 group-data-[collapsible=icon]:hidden">
-                        © {platform?.year} {branding?.name} - Developed by <a href="https://www.linkedin.com/company/mercure-one" target="_blank" className="hover:text-[#7b2cbf] transition duration-300 ease-in-out">{platform?.name}</a>
+                        © {platform?.year} {branding?.name} - Developed by <a href="https://www.linkedin.com/company/mercure-one" target="_blank" className="hover:text-secondary-brand transition duration-300 ease-in-out">{platform?.name}</a>
                     </p>
                 </div>
             </SidebarFooter>
