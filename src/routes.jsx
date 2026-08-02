@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
 import AppLayout from "@/components/layout/AppLayout";
 import Dashboard from "@/pages/Dashboard";
@@ -8,19 +8,31 @@ import Certificats from "@/pages/Certificats";
 import Formations from "@/pages/Formations";
 import FormationActive from "@/pages/FormationActive";
 import TestFinal from "@/pages/TestFinal";
+import { ProtectedRoute, PublicRoute } from "./components/auth/RouteGuards";
 
-export const router = createBrowserRouter ([
-    { path: "/login", element: <Login /> },
+export const router = createBrowserRouter([
+    { path: "/", element: <Navigate to="/login" replace /> },
     {
-        element: <AppLayout />,
+        element: <PublicRoute />,
         children: [
-            { path: "/dashboard", element: <Dashboard />},
-            { path: "/account", element: <Account /> },
-            { path: "/support", element: <Support /> },
-            { path: "/certificats", element: <Certificats /> },
-            { path: "/formations", element: <Formations /> },
-            { path: "/formation/:id", element: <FormationActive /> }, 
-        ],
+            { path: "/login", element: <Login /> },
+        ]
     },
-    { path: "/test/:id", element: <TestFinal /> },
+    {
+        element: <ProtectedRoute />,
+        children: [
+            {
+                element: <AppLayout />,
+                children: [
+                    { path: "/dashboard", element: <Dashboard /> },
+                    { path: "/account", element: <Account /> },
+                    { path: "/support", element: <Support /> },
+                    { path: "/certificats", element: <Certificats /> },
+                    { path: "/formations", element: <Formations /> },
+                    { path: "/formation/:id", element: <FormationActive /> },
+                ],
+            },
+            { path: "/test/:id", element: <TestFinal /> },
+        ]
+    },
 ])

@@ -11,10 +11,12 @@ import {
     AlertDialogTitle, AlertDialogDescription, AlertDialogFooter,
     AlertDialogCancel, AlertDialogAction,
 } from "@/components/ui/alert-dialog"
+import { useAuth } from "@/context/AuthContext";
 
 export default function UserMenu({ firstName, lastName, email }) {
     const navigate = useNavigate()
     const [confirmOpen, setConfirmOpen] = useState(false)
+    const { logout } = useAuth();
 
     return (
         <>
@@ -60,7 +62,7 @@ export default function UserMenu({ firstName, lastName, email }) {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel className="rounded-sm transition-colors duration-300 ease-in-out">Annuler</AlertDialogCancel>
-                        <AlertDialogAction className="rounded-sm transition-colors duration-300 ease-in-out bg-primary hover:bg-primary/90" onClick={() => navigate("/login")}>
+                        <AlertDialogAction className="rounded-sm transition-colors duration-300 ease-in-out bg-primary hover:bg-primary/90" onClick={() => { logout(); navigate("/login", { replace: true }); }}>
                             Se déconnecter
                         </AlertDialogAction>
                     </AlertDialogFooter>

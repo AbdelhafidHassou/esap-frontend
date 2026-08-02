@@ -1,7 +1,7 @@
 import { getBranding, getEmployee, getPlatform } from "@/data/api";
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AppDataContext = createContext(null)
+const AppDataContext = createContext(null);
 
 export function AppDataProvider({children}) {
     const [employee, setEmployee] = useState(null)

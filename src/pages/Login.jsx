@@ -4,14 +4,15 @@ import { Mail } from "lucide-react";
 import { useAppData } from "@/context/AppDataContext";
 import { requestOtp, verifyOtp } from "@/data/api";
 import { OtpInput } from "@/components/auth/OtpInput";
+import { useAuth } from "@/context/AuthContext";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RESEND_SECONDS = 30;
 
 export default function Login() {
   const navigate = useNavigate();
-  const { branding } = useAppData();
-  const { platform } = useAppData()
+  const { branding, platform } = useAppData();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [codeSent, setCodeSent] = useState(false);
@@ -64,7 +65,7 @@ export default function Login() {
     try {
       const res = await verifyOtp(email, value);
       if (res.success) {
-        // TODO (next step): store res.token in auth context, then redirect.
+        login(res.token);
         navigate("/dashboard");
       } else {
         setError("Code incorrect. Réessayez.");
@@ -80,7 +81,6 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen">
-      {/* LEFT: form */}
       <div className="flex w-full flex-col justify-center px-6 py-12 sm:px-12">
         <div className="mx-auto w-full max-w-sm">
           {branding?.logoUrl && (
@@ -101,7 +101,6 @@ export default function Login() {
             Veuillez vous connecter à votre compte.
           </p>
 
-          {/* Email + send button */}
           <div className="mt-8">
             <label className="text-sm font-medium text-foreground">Email</label>
             <div className="mt-2 flex gap-2">
@@ -126,7 +125,6 @@ export default function Login() {
             </div>
           </div>
 
-          {/* OTP block */}
           {codeSent && (
             <div className="mt-6">
               <p className="text-sm text-muted-foreground">
@@ -153,7 +151,6 @@ export default function Login() {
             </div>
           )}
 
-          {/* error before code sent */}
           {!codeSent && error && (
             <p className="mt-4 text-sm text-danger">{error}</p>
           )}
@@ -173,7 +170,6 @@ export default function Login() {
         </footer>
       </div>
 
-      {/* RIGHT: geometric brand pattern — alternating triangles */}
       <div className="relative hidden w-2/4 overflow-hidden lg:block">
         <svg
           className="absolute inset-0 h-full w-full"
