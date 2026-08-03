@@ -12,6 +12,7 @@ import {
   riskScore,
   dashboardStats,
   progressOverTime,
+  quizzes,
 } from "@/mocks";
 
 const delay = (ms = 200) => new Promise((r) => setTimeout(r, ms));
@@ -253,4 +254,79 @@ export async function verifyOtp(email, code) {
     return { success: true, token: "mock-token" };
   }
   return { success: false };
+}
+
+export async function getChapterContent(chapterId) {
+  await delay();
+  for (const dep of departments) {
+    for (const mod of dep.modules) {
+      const ch = mod.chapters.find((c) => c.id === chapterId);
+      if (ch) {
+        return {
+          id: ch.id,
+          title: ch.title,
+          contentType: ch.contentType,
+          readingTimerSeconds: mod.readingTimerSeconds ?? 180,
+          body: ch.body ?? null,
+        };
+      }
+    }
+  }
+  return null;
+}
+
+export async function getQuiz(quizId) {
+  await delay();
+  const questions = quizzes[quizId];
+  if (!questions) return null;
+  return {
+    id: quizId,
+    questions: questions.map((q) => ({
+      id: q.id,
+      text: q.text,
+      type: q.type,
+      options: q.options.map((o) => ({ id: o.id, text: o.text })),
+    })),
+  };
+}
+
+export async function submitQuiz(quizId, answers) {
+  await delay();
+  const questions = quizzes[quizId];
+  if (!questions) return null;
+
+  let correctCount = 0;
+  const results = questions.map((q) => {
+    const correctIds = q.options
+      .filter((o) => o.isCorrect)
+      .map((o) => o.id)
+      .sort();
+    const given = (answers[q.id] ?? []).slice().sort();
+    const isCorrect =
+      correctIds.length === given.length &&
+      correctIds.every((id, i) => id === given[i]);
+    if (isCorrect) correctCount++;
+    return {
+      questionId: q.id,
+      correct: isCorrect,
+      hint: isCorrect ? null : q.hint,
+    };
+  });
+  const score = Math.round((correctCount / questions.length) * 100);
+  return {
+    score,
+    passed: score === 100,
+    total: questions.length,
+    correctCount,
+    results,
+  };
+}
+
+export async function markChapterRead(chapterId) {
+  await delay();
+  if (!readSet.has(chapterId)) {
+    readChapters.push(chapterId);
+    readSet.add(chapterId);
+  }
+  return { success: true };
 }

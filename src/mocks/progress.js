@@ -1,8 +1,7 @@
 export const readChapters = [
   "ch_it_1_1", "ch_it_1_2", "ch_it_1_3", "ch_it_1_4", "ch_it_1_5",
-  "ch_it_2_1", "ch_it_2_2",
-  "ch_hr_1_1", "ch_hr_1_2", "ch_hr_1_3", "ch_hr_1_4", "ch_hr_1_5", "ch_hr_1_6",
-  "ch_hr_2_1"
+  "ch_it_2_1",
+  "ch_hr_1_1", 
 ];
 
 export const quizProgress = {

@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { getFormationDetails } from "@/data/api";
+import { getFormationDetails, markChapterRead } from "@/data/api";
 import { computeFormationProgress, flattenTree } from "@/utils/flattenTree";
 import { FormationTree } from "@/components/training/FormationTree";
 import { ArrowLeft } from "lucide-react";
 import { useAppData } from "@/context/AppDataContext";
 import UserMenu from "@/components/layout/UserMenu";
+import { ChapterView } from "@/components/training/ChapterView";
 
 export default function FormationActive() {
     const { id } = useParams();
@@ -22,7 +23,6 @@ export default function FormationActive() {
         () => (formation ? computeFormationProgress(formation) : { done: 0, total: 0, percent: 0 }),
         [formation]
     );
-
 
     useEffect(() => {
         let alive = true;
@@ -58,6 +58,20 @@ export default function FormationActive() {
 
     const handleToggleModule = (moduleId) => {
         setOpenModuleId((cur) => (cur === moduleId ? null : moduleId)); // un seul ouvert
+    };
+
+    const handleCompleteChapter = async (chapterId) => {
+        await markChapterRead(chapterId);
+        const fresh = await getFormationDetails(id);
+        setFormation(fresh);
+
+        const freshFlat = flattenTree(fresh);
+        const idx = freshFlat.findIndex((e) => e.id === chapterId);
+        const next = freshFlat[idx + 1];
+        if (next && next.node.status !== "locked") {
+            setSelectedId(next.id);
+            if (next.moduleId) setOpenModuleId(next.moduleId);
+        }
     };
 
     if (loading) return <div className="p-6">Chargement…</div>;
@@ -115,9 +129,7 @@ export default function FormationActive() {
                 </div>
             </header>
 
-
             <div className="flex min-h-0 flex-1">
-
                 <aside className="hidden w-80 shrink-0 overflow-y-auto border-r border-border bg-white lg:block">
                     <FormationTree
                         formation={formation}
@@ -128,17 +140,29 @@ export default function FormationActive() {
                     />
                 </aside>
 
-
                 <main className="min-w-0 flex-1 overflow-y-auto p-6 md:p-10">
-                    <div className="mx-auto max-w-3xl">
-
+                    <div className={selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType)
+                        ? "mx-auto max-w-7xl"
+                        : "mx-auto max-w-3xl"
+                    }>
                         <p className="text-xs uppercase tracking-wide text-muted-foreground">{selected?.type}</p>
-                        <h1 className="mt-1 text-2xl font-bold text-foreground">
+                        <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
                             {selected?.node.title ?? selected?.type}
                         </h1>
-                        <div className="mt-6 rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
-                            Contenu « {selected?.type} » - statut {selected?.node.status}
-                        </div>
+
+                        {selected?.type === "chapter" && (
+                            <ChapterView
+                                chapterId={selected.id}
+                                isCompleted={selected.node.status === "completed"}
+                                onComplete={handleCompleteChapter}
+                            />
+                        )}
+
+                        {selected?.type !== "chapter" && (
+                            <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
+                                Contenu « {selected?.type} » - à venir
+                            </div>
+                        )}
                     </div>
                 </main>
             </div>
