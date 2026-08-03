@@ -15,10 +15,10 @@ export default function SearchBar() {
             const flat = []
             departments.forEach((dep) => {
                 dep.modules.forEach((mod) => {
-                    flat.push({ type: "Module", title: mod.title, moduleId: mod.id, dep: dep.name })
                     mod.chapters.forEach((ch) => {
-                        flat.push({ type: "Chapitre", title: ch.title, moduleId: mod.id, dep: dep.name })
+                        flat.push({ type: "Chapitre", title: ch.title, moduleId: mod.id, departmentId: dep.id, dep: dep.name })
                     })
+                    flat.push({ type: "Module", title: mod.title, moduleId: mod.id, departmentId: dep.id, dep: dep.name })
                 })
             })
             setItems(flat)
@@ -62,7 +62,7 @@ export default function SearchBar() {
                             <button
                                 key={i}
                                 onClick={() => {
-                                    navigate(`/formation/${r.moduleId}`)
+                                    navigate(`/formation/${r.departmentId}`, { state: { focusModuleId: r.moduleId } })
                                     setQuery(""); setOpen(false)
                                 }}
                                 className="flex w-full flex-col items-start px-4 py-2.5 text-left hover:bg-muted transition-colors"

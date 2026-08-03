@@ -5,7 +5,7 @@ export const employee = {
     firstName: "Sara",
     lastName: "Benali",
     email: "sara.benali@client.com",
-    departments: ["dept_it", "dept_hr"],
+    departments: ["dep_it", "dep_hr"],
 }
 
 export const clientBranding = {

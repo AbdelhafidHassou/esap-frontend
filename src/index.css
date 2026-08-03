@@ -33,6 +33,7 @@
     --color-secondary: var(--secondary);
     --color-primary-foreground: var(--primary-foreground);
     --color-primary: var(--primary);
+    --color-platform-brand: var(--platform-brand);
     --color-popover-foreground: var(--popover-foreground);
     --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
@@ -66,10 +67,11 @@
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --primary: #7b2cbf;
+    --primary: #5832bb;
     --primary-light: rgba(123, 44, 191, 0.12);
     --secondary-brand: #9d4edd;
     --secondary-brand-light: rgba(157, 78, 221, 0.12);
+    --platform-brand: #5832bb;
     --background: var(--bg-canvas);
     --foreground: var(--text-main);
     --card: var(--bg-surface);
@@ -144,9 +146,9 @@
 
     body {
         @apply bg-background text-foreground;
-      }
+    }
 
-      html {
+    html {
         @apply font-sans;
-      }
+    }
 }

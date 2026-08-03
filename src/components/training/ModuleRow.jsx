@@ -42,7 +42,7 @@ export function ModuleRow({ module }) {
       {status.action && (
         <button
           type="button"
-          onClick={() => navigate(`/formation/${module.id}`)}
+          onClick={() => navigate(`/formation/${module.departmentId}`, { state: { focusModuleId: module.id }, })}
           className="w-full shrink-0 rounded-sm bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 sm:w-auto"
         >
           {status.action}

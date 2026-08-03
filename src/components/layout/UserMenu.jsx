@@ -22,7 +22,9 @@ export default function UserMenu({ firstName, lastName, email }) {
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center gap-2 text-sm">
-                    <span>{firstName} {lastName}</span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+                        {firstName?.[0]?.toUpperCase()}
+                    </span>
                     <ChevronDown className="h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 rounded-sm">

@@ -29,9 +29,9 @@ export const router = createBrowserRouter([
                     { path: "/support", element: <Support /> },
                     { path: "/certificats", element: <Certificats /> },
                     { path: "/formations", element: <Formations /> },
-                    { path: "/formation/:id", element: <FormationActive /> },
                 ],
             },
+            { path: "/formation/:id", element: <FormationActive /> },
             { path: "/test/:id", element: <TestFinal /> },
         ]
     },
