@@ -59,7 +59,7 @@ function ChapterBody({ contentType, body }) {
           href={body.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-90"
+          className="inline-flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-3 text-sm font-medium text-primary-foreground hover:opacity-90"
         >
           <ExternalLink className="h-4 w-4" />
           {body.label ?? "Ouvrir le lien"}
@@ -106,7 +106,7 @@ export function ChapterView({ chapterId, isCompleted, onComplete }) {
     getChapterContent(chapterId).then((data) => {
       if (!alive) return;
       setContent(data);
-      
+
       setRemaining(isCompleted ? 0 : 10); //data?.readingTimerSeconds ?? 180);
       setLoading(false);
     });
@@ -148,11 +148,10 @@ export function ChapterView({ chapterId, isCompleted, onComplete }) {
             type="button"
             disabled={!canComplete}
             onClick={() => onComplete(chapterId)}
-            className={`rounded-sm px-5 py-2.5 text-sm font-medium transition ${
-              canComplete
-                ? "bg-primary text-primary-foreground hover:opacity-90 cursor-pointer"
+            className={`rounded-sm px-5 py-2.5 text-sm font-medium transition ${canComplete
+                ? "bg-platform-brand text-white hover:opacity-90"
                 : "cursor-not-allowed bg-muted text-muted-foreground"
-            }`}
+              }`}
           >
             Marquer comme terminé
           </button>

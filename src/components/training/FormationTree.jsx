@@ -1,9 +1,9 @@
 import { CheckCircle2, CircleDot, Lock, Circle, ChevronDown, ChevronRight } from "lucide-react";
 
 const NODE_ICON = {
-    completed: { Icon: CheckCircle2, className: "text-success" },
-    in_progress: { Icon: Circle, className: "text-gray-700" },
-    unlocked: { Icon: Circle, className: "text-secondary-brand" },
+    completed: { Icon: CheckCircle2, className: "text-platform-brand" },
+    in_progress: { Icon: CircleDot, className: "text-platform-brand/60" },
+    unlocked: { Icon: Circle, className: "text-gray-600" },
     locked: { Icon: Lock, className: "text-muted-foreground" },
 };
 

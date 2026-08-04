@@ -330,3 +330,9 @@ export async function markChapterRead(chapterId) {
   }
   return { success: true };
 }
+
+export async function markQuizPassed(quizId, score = 100) {
+  await delay();
+  quizProgress[quizId] = { passed: true, score };
+  return { success: true };
+}

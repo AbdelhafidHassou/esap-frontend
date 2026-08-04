@@ -1,17 +1,22 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { getFormationDetails, markChapterRead } from "@/data/api";
+import { getFormationDetails, markChapterRead, markQuizPassed } from "@/data/api";
 import { computeFormationProgress, flattenTree } from "@/utils/flattenTree";
 import { FormationTree } from "@/components/training/FormationTree";
-import { ArrowLeft } from "lucide-react";
 import { useAppData } from "@/context/AppDataContext";
 import UserMenu from "@/components/layout/UserMenu";
 import { ChapterView } from "@/components/training/ChapterView";
+import { QuizView } from "@/components/training/QuizView";
+import { ArrowLeft, Menu } from "lucide-react";
+import {
+    Sheet, SheetContent, SheetTrigger, SheetTitle,
+} from "@/components/ui/sheet";
 
 export default function FormationActive() {
     const { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
+    const [treeOpen, setTreeOpen] = useState(false);
     const focusModuleId = location.state?.focusModuleId;
 
     const [formation, setFormation] = useState(null);
@@ -74,6 +79,12 @@ export default function FormationActive() {
         }
     };
 
+    const handleQuizPassed = async (quizId) => {
+        await markQuizPassed(quizId);
+        const fresh = await getFormationDetails(id);
+        setFormation(fresh);
+    };
+
     if (loading) return <div className="p-6">Chargement…</div>;
     if (!formation) return <div className="p-6">Formation introuvable.</div>;
 
@@ -82,6 +93,21 @@ export default function FormationActive() {
     return (
         <div className="flex h-screen flex-col bg-background">
             <header className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-white px-4">
+                <Sheet open={treeOpen} onOpenChange={setTreeOpen}>
+                    <SheetTrigger className="lg:hidden">
+                        <Menu className="h-5 w-5 text-muted-foreground" />
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-80 overflow-y-auto p-0">
+                        <SheetTitle className="sr-only">Parcours de formation</SheetTitle>
+                        <FormationTree
+                            formation={formation}
+                            selectedId={selectedId}
+                            onSelect={(nodeId) => { handleSelect(nodeId); setTreeOpen(false); }}
+                            openModuleId={openModuleId}
+                            onToggleModule={handleToggleModule}
+                        />
+                    </SheetContent>
+                </Sheet>
                 <button
                     onClick={() => navigate("/formations")}
                     className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
@@ -130,7 +156,7 @@ export default function FormationActive() {
             </header>
 
             <div className="flex min-h-0 flex-1">
-                <aside className="hidden w-80 shrink-0 overflow-y-auto border-r border-border bg-white lg:block">
+                <aside className="hidden w-100 shrink-0 overflow-y-auto border-r border-border bg-white lg:block">
                     <FormationTree
                         formation={formation}
                         selectedId={selectedId}
@@ -141,13 +167,23 @@ export default function FormationActive() {
                 </aside>
 
                 <main className="min-w-0 flex-1 overflow-y-auto p-6 md:p-10">
-                    <div className={selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType)
-                        ? "mx-auto max-w-7xl"
-                        : "mx-auto max-w-3xl"
+                    <div className={
+                        (selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType))
+                            || selected?.type === "quiz"
+                            ? "mx-auto max-w-7xl"
+                            : "mx-auto max-w-3xl"
                     }>
-                        <p className="text-xs uppercase tracking-wide text-muted-foreground">{selected?.type}</p>
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                            {selected?.type === "quiz" ? "Évaluation" : selected?.type}
+                        </p>
                         <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
-                            {selected?.node.title ?? selected?.type}
+                            {selected?.node.title ?? (
+                                selected?.type === "quiz" ? "Quiz du module"
+                                    : selected?.type === "test" ? "Test final"
+                                        : selected?.type === "ssi" ? "Conditions SSI"
+                                            : selected?.type === "validation" ? "Validation"
+                                                : selected?.type
+                            )}
                         </h1>
 
                         {selected?.type === "chapter" && (
@@ -158,7 +194,15 @@ export default function FormationActive() {
                             />
                         )}
 
-                        {selected?.type !== "chapter" && (
+                        {selected?.type === "quiz" && (
+                            <QuizView
+                                quizId={selected.id}
+                                isCompleted={selected.node.status === "completed"}
+                                onPassed={() => handleQuizPassed(selected.id)}
+                            />
+                        )}
+
+                        {!["chapter", "quiz"].includes(selected?.type) && (
                             <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
                                 Contenu « {selected?.type} » - à venir
                             </div>
