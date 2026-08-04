@@ -6,7 +6,11 @@ export const readChapters = [
 
 export const quizProgress = {
   quiz_it_1: { passed: true, score: 100 },
-  quiz_hr_1: { passed: true, score: 100 },
+  quiz_it_2: { passed: true, score: 100 },
+  quiz_it_3: { passed: true, score: 100 },
+  quiz_it_4: { passed: true, score: 100 },
+  quiz_it_5: { passed: true, score: 100 },
+  quiz_it_6: { passed: true, score: 100 },
 };
 
 export const testProgress = {

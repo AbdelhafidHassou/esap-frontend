@@ -11,6 +11,7 @@ import { ArrowLeft, Menu } from "lucide-react";
 import {
     Sheet, SheetContent, SheetTrigger, SheetTitle,
 } from "@/components/ui/sheet";
+import { TestRecap } from "@/components/training/TestRecap";
 
 export default function FormationActive() {
     const { id } = useParams();
@@ -202,7 +203,15 @@ export default function FormationActive() {
                             />
                         )}
 
-                        {!["chapter", "quiz"].includes(selected?.type) && (
+                        {selected?.type === "test" && (
+                            <TestRecap
+                                test={formation.test}
+                                onStart={() => navigate(`/test/${id}`)}
+                                onContinue={() => handleSelect("ssi")}
+                            />
+                        )}
+
+                        {!["chapter", "quiz", "test"].includes(selected?.type) && (
                             <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
                                 Contenu « {selected?.type} » - à venir
                             </div>
