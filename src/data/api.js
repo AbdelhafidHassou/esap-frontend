@@ -13,11 +13,12 @@ import {
   dashboardStats,
   progressOverTime,
   quizzes,
+  testBank,
 } from "@/mocks";
 
 const delay = (ms = 200) => new Promise((r) => setTimeout(r, ms));
-
 const readSet = new Set(readChapters);
+const testDraws = {};
 
 function deriveChapterStatuses(chapters, moduleUnlocked) {
   if (!moduleUnlocked) {
@@ -110,6 +111,7 @@ export async function getFormationDetails(deptId) {
     maxAttemptsPerDay: 3,
     lastScore: tp.lastScore,
     passed: tp.passed,
+    lastResult: tp.lastResult ?? null,
   };
 
   const openList = ssiOpened[deptId] ?? [];
@@ -335,4 +337,152 @@ export async function markQuizPassed(quizId, score = 100) {
   await delay();
   quizProgress[quizId] = { passed: true, score };
   return { success: true };
+}
+
+export async function submitAnswer(quizId, questionId, given) {
+  await delay(150);
+  const questions = quizzes[quizId];
+  if (!questions) return null;
+  const q = questions.find((x) => x.id === questionId);
+  if (!q) return null;
+
+  const correctIds = q.options
+    .filter((o) => o.isCorrect)
+    .map((o) => o.id)
+    .sort();
+  const ans = (given ?? []).slice().sort();
+  const correct =
+    correctIds.length === ans.length &&
+    correctIds.every((id, i) => id === ans[i]);
+
+  return {
+    correct,
+    correctIds,
+    hint: correct ? null : q.hint,
+  };
+}
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function distributeCount(moduleIds, total) {
+  const n = moduleIds.length;
+  const base = Math.floor(total / n);
+  let rest = total - base * n;
+  const out = {};
+  moduleIds.forEach((mid) => {
+    out[mid] = base + (rest > 0 ? 1 : 0);
+    if (rest > 0) rest--;
+  });
+  return out;
+}
+
+export async function startTest(testId, deptId) {
+  await delay();
+  const bankByModule = testBank[testId];
+  if (!bankByModule) return null;
+
+  const tp = testProgress[deptId] ?? { attemptsToday: 0, passed: false };
+  if (tp.attemptsToday >= 3) {
+    return { error: "no_attempts_left" };
+  }
+
+  const attemptNumber = tp.attemptsToday + 1;
+  const key = `${testId}:${attemptNumber}`;
+
+  if (!testDraws[key]) {
+    const moduleIds = Object.keys(bankByModule);
+    const counts = distributeCount(moduleIds, 15);
+    const draw = {};
+    moduleIds.forEach((mid) => {
+      draw[mid] = shuffle(bankByModule[mid])
+        .slice(0, counts[mid])
+        .map((q) => q.id);
+    });
+    testDraws[key] = draw;
+  }
+  const draw = testDraws[key];
+
+  const questions = [];
+  Object.entries(draw).forEach(([mid, ids]) => {
+    ids.forEach((qid) => {
+      const q = bankByModule[mid].find((x) => x.id === qid);
+      questions.push({
+        id: q.id,
+        moduleId: mid,
+        text: q.text,
+        type: q.type,
+        options: q.options.map((o) => ({ id: o.id, text: o.text })),
+      });
+    });
+  });
+
+  return {
+    testId,
+    deptId,
+    attemptNumber,
+    timerSeconds: 1800,
+    passThreshold: 80,
+    questions,
+  };
+}
+
+export async function submitTest(testId, deptId, attemptNumber, answers) {
+  await delay();
+  const bankByModule = testBank[testId];
+  if (!bankByModule) return null;
+
+  const key = `${testId}:${attemptNumber}`;
+  const draw = testDraws[key];
+  if (!draw) return null;
+
+  const perModule = {};
+  const results = {}; // { questionId: { correct, correctIds } }
+  let totalCorrect = 0;
+  let totalQuestions = 0;
+
+  Object.entries(draw).forEach(([mid, ids]) => {
+    perModule[mid] = { correct: 0, total: ids.length };
+    ids.forEach((qid) => {
+      const q = bankByModule[mid].find((x) => x.id === qid);
+      const correctIds = q.options
+        .filter((o) => o.isCorrect)
+        .map((o) => o.id)
+        .sort();
+      const given = (answers[qid] ?? []).slice().sort();
+      const ok =
+        correctIds.length === given.length &&
+        correctIds.every((c, i) => c === given[i]);
+      if (ok) {
+        perModule[mid].correct++;
+        totalCorrect++;
+      }
+      totalQuestions++;
+      results[qid] = { correct: ok, correctIds };
+    });
+  });
+
+  const score = Math.round((totalCorrect / totalQuestions) * 100);
+  const passed = score >= 80;
+
+  const tp = testProgress[deptId] ?? {
+    attemptsToday: 0,
+    lastScore: null,
+    passed: false,
+  };
+  tp.attemptsToday += 1;
+  tp.lastScore = score;
+  tp.passed = tp.passed || passed;
+  tp.lastResult = { score, passed, totalCorrect, totalQuestions, perModule };
+  testProgress[deptId] = tp;
+
+  delete testDraws[key];
+
+  return { score, passed, totalCorrect, totalQuestions, perModule, results };
 }

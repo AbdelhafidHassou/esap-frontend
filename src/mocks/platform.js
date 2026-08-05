@@ -1,4 +1,4 @@
-import mercureLogo from "@/assets/mercure_logo.png"
+import mercureLogo from "@/assets/mercure_logo_.png"
 
 export const platform = {
     name: "Mercure",

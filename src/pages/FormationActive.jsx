@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { getFormationDetails, markChapterRead, markQuizPassed } from "@/data/api";
 import { computeFormationProgress, flattenTree } from "@/utils/flattenTree";
@@ -7,11 +7,18 @@ import { useAppData } from "@/context/AppDataContext";
 import UserMenu from "@/components/layout/UserMenu";
 import { ChapterView } from "@/components/training/ChapterView";
 import { QuizView } from "@/components/training/QuizView";
-import { ArrowLeft, Menu } from "lucide-react";
+import { ArrowLeft, ArrowRight, Eye, EyeClosed, Menu } from "lucide-react";
 import {
     Sheet, SheetContent, SheetTrigger, SheetTitle,
 } from "@/components/ui/sheet";
 import { TestRecap } from "@/components/training/TestRecap";
+
+function formatTime(s) {
+    if (s == null) return "";
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+}
 
 export default function FormationActive() {
     const { id } = useParams();
@@ -19,7 +26,8 @@ export default function FormationActive() {
     const navigate = useNavigate();
     const [treeOpen, setTreeOpen] = useState(false);
     const focusModuleId = location.state?.focusModuleId;
-
+    const [chapterState, setChapterState] = useState({ remaining: null, canAdvance: false, loading: true });
+    const [initialized, setInitialized] = useState(false);
     const [formation, setFormation] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
@@ -29,6 +37,8 @@ export default function FormationActive() {
         () => (formation ? computeFormationProgress(formation) : { done: 0, total: 0, percent: 0 }),
         [formation]
     );
+
+    const handleChapterState = useCallback((state) => setChapterState(state), []);
 
     useEffect(() => {
         let alive = true;
@@ -44,7 +54,7 @@ export default function FormationActive() {
     const flat = useMemo(() => (formation ? flattenTree(formation) : []), [formation]);
 
     useEffect(() => {
-        if (!formation || flat.length === 0) return;
+        if (!formation || flat.length === 0 || initialized) return;
         const isActionable = (e) => e.node.status !== "completed" && e.node.status !== "locked";
 
         let target;
@@ -54,26 +64,28 @@ export default function FormationActive() {
         target = target ?? flat.find(isActionable) ?? flat[0];
         setSelectedId(target.id);
         if (target.moduleId) setOpenModuleId(target.moduleId);
-    }, [formation, flat, focusModuleId]);
+        setInitialized(true);
+    }, [formation, flat, focusModuleId, initialized]);
 
     const handleSelect = (nodeId) => {
         setSelectedId(nodeId);
         const entry = flat.find((e) => e.id === nodeId);
-        if (entry?.moduleId) setOpenModuleId(entry.moduleId); // garde le module ouvert
+        if (entry?.moduleId) setOpenModuleId(entry.moduleId);
     };
 
     const handleToggleModule = (moduleId) => {
-        setOpenModuleId((cur) => (cur === moduleId ? null : moduleId)); // un seul ouvert
+        setOpenModuleId((cur) => (cur === moduleId ? null : moduleId));
     };
 
-    const handleCompleteChapter = async (chapterId) => {
+    const handleMarkRead = async (chapterId) => {
         await markChapterRead(chapterId);
         const fresh = await getFormationDetails(id);
         setFormation(fresh);
+    };
 
-        const freshFlat = flattenTree(fresh);
-        const idx = freshFlat.findIndex((e) => e.id === chapterId);
-        const next = freshFlat[idx + 1];
+    const handleNextChapter = (chapterId) => {
+        const idx = flat.findIndex((e) => e.id === chapterId);
+        const next = flat[idx + 1];
         if (next && next.node.status !== "locked") {
             setSelectedId(next.id);
             if (next.moduleId) setOpenModuleId(next.moduleId);
@@ -93,7 +105,7 @@ export default function FormationActive() {
 
     return (
         <div className="flex h-screen flex-col bg-background">
-            <header className="flex h-14 shrink-0 items-center gap-4 border-b border-border bg-white px-4">
+            <header className="flex h-18 shrink-0 items-center gap-4 border-b border-border bg-white px-4">
                 <Sheet open={treeOpen} onOpenChange={setTreeOpen}>
                     <SheetTrigger className="lg:hidden">
                         <Menu className="h-5 w-5 text-muted-foreground" />
@@ -122,12 +134,11 @@ export default function FormationActive() {
                     className="flex items-center gap-2 transition-opacity cursor-pointer"
                 >
                     {platform?.logoUrl && (
-                        <img src={platform.logoUrl} alt={platform.name} className="h-10 w-auto object-contain" />
+                        <img src={platform.logoUrl} alt={platform.name} className="h-14 w-auto object-contain" />
                     )}
-                    <span className="text-xl font-bold text-platform-brand">{platform?.name}</span>
                 </button>
 
-                <span className="h-6 w-px bg-border" />
+                <span className="h-6 w-px bg-muted-foreground" />
 
                 {branding?.logoUrl && (
                     <img src={branding.logoUrl} alt={branding.name} className="h-6 w-auto rounded-xs object-contain" />
@@ -167,56 +178,83 @@ export default function FormationActive() {
                     />
                 </aside>
 
-                <main className="min-w-0 flex-1 overflow-y-auto p-6 md:p-10">
-                    <div className={
-                        (selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType))
-                            || selected?.type === "quiz"
-                            ? "mx-auto max-w-7xl"
-                            : "mx-auto max-w-3xl"
-                    }>
-                        <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                            {selected?.type === "quiz" ? "Évaluation" : selected?.type}
-                        </p>
-                        <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
-                            {selected?.node.title ?? (
-                                selected?.type === "quiz" ? "Quiz du module"
-                                    : selected?.type === "test" ? "Test final"
-                                        : selected?.type === "ssi" ? "Conditions SSI"
-                                            : selected?.type === "validation" ? "Validation"
-                                                : selected?.type
+                <main className="flex min-w-0 flex-1 flex-col bg-white">
+                    <div className="flex-1 overflow-y-auto">
+                        <div className={
+                            (selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType))
+                                || selected?.type === "quiz" || selected?.type === "test"
+                                ? "mx-auto max-w-7xl px-6 py-6 md:px-10 md:py-10"
+                                : "mx-auto max-w-3xl px-6 py-6 md:px-10 md:py-10"
+                        }>
+                            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                                {selected?.type === "quiz" ? "Évaluation" : selected?.type}
+                            </p>
+                            <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
+                                {selected?.node.title ?? (
+                                    selected?.type === "quiz" ? "Quiz du module"
+                                        : selected?.type === "test" ? "Test final"
+                                            : selected?.type === "ssi" ? "Conditions SSI"
+                                                : selected?.type === "validation" ? "Validation"
+                                                    : selected?.type
+                                )}
+                            </h1>
+
+                            {selected?.type === "chapter" && (
+                                <ChapterView
+                                    key={selected.id}
+                                    chapterId={selected.id}
+                                    isCompleted={selected.node.status === "completed"}
+                                    onMarkRead={handleMarkRead}
+                                    onStateChange={handleChapterState}
+                                />
                             )}
-                        </h1>
 
-                        {selected?.type === "chapter" && (
-                            <ChapterView
-                                chapterId={selected.id}
-                                isCompleted={selected.node.status === "completed"}
-                                onComplete={handleCompleteChapter}
-                            />
-                        )}
+                            {selected?.type === "quiz" && (
+                                <QuizView
+                                    quizId={selected.id}
+                                    isCompleted={selected.node.status === "completed"}
+                                    onPassed={() => handleQuizPassed(selected.id)}
+                                />
+                            )}
 
-                        {selected?.type === "quiz" && (
-                            <QuizView
-                                quizId={selected.id}
-                                isCompleted={selected.node.status === "completed"}
-                                onPassed={() => handleQuizPassed(selected.id)}
-                            />
-                        )}
+                            {selected?.type === "test" && (
+                                <TestRecap
+                                    test={formation.test}
+                                    onStart={() => navigate(`/test/${id}`)}
+                                    onContinue={() => handleSelect("ssi")}
+                                />
+                            )}
 
-                        {selected?.type === "test" && (
-                            <TestRecap
-                                test={formation.test}
-                                onStart={() => navigate(`/test/${id}`)}
-                                onContinue={() => handleSelect("ssi")}
-                            />
-                        )}
-
-                        {!["chapter", "quiz", "test"].includes(selected?.type) && (
-                            <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
-                                Contenu « {selected?.type} » - à venir
-                            </div>
-                        )}
+                            {!["chapter", "quiz", "test"].includes(selected?.type) && (
+                                <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
+                                    Contenu « {selected?.type} » - à venir
+                                </div>
+                            )}
+                        </div>
                     </div>
+
+                    {selected?.type === "chapter" && !chapterState.loading && (
+                        <div className="flex shrink-0 items-center justify-between border-t border-border bg-white px-6 py-4 md:px-10">
+                            {chapterState.canAdvance ? (
+                                <span className="flex items-center gap-1 text-muted-foreground transition duration-500 ease-in-out"><Eye className="h-4 w-4" /> <span className="text-sm font-medium text-muted-foreground">0:00</span></span>
+                            ) : (
+                                <span className="flex items-center gap-1 text-muted-foreground transition duration-500 ease-in-out">
+                                    <EyeClosed className="h-4 w-4"/> <span className="text-sm font-medium text-muted-foreground">{formatTime(chapterState.remaining)}</span>
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                disabled={!chapterState.canAdvance}
+                                onClick={() => handleNextChapter(selected.id)}
+                                className={`flex items-center gap-1 rounded-sm px-5 py-2.5 text-sm font-medium transition ${chapterState.canAdvance
+                                    ? "bg-platform-brand text-white hover:opacity-90"
+                                    : "cursor-not-allowed bg-muted text-muted-foreground"
+                                    }`}
+                            >
+                                Chapitre suivant <ArrowRight className="h-4 w-4" />
+                            </button>
+                        </div>
+                    )}
                 </main>
             </div>
         </div>

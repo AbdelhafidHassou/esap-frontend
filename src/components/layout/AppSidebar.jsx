@@ -56,14 +56,14 @@ export default function AppSidebar() {
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupContent className="overflow-hidden">
+                    <SidebarGroupContent className="overflow-hidden ">
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.url}>
                                     <SidebarMenuButton
                                         render={<Link to={item.url} />}
                                         isActive={pathname === item.url}
-                                        className="mb-1 w-full min-w-0 transition-colors duration-300 ease-in-out"
+                                        className="mb-1 w-full min-w-0 transition-colors duration-300 ease-in-out text-md h-12 "
                                     >
                                         <item.icon />
                                         <span className="truncate">{item.title}</span>

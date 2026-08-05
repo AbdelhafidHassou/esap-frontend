@@ -1,7 +1,11 @@
 export const readChapters = [
-  "ch_it_1_1", "ch_it_1_2", "ch_it_1_3", "ch_it_1_4", "ch_it_1_5",
+  "ch_it_1_1",
+  "ch_it_1_2",
+  "ch_it_1_3",
+  "ch_it_1_4",
+  "ch_it_1_5",
   "ch_it_2_1",
-  "ch_hr_1_1", 
+  "ch_hr_1_1",
 ];
 
 export const quizProgress = {
@@ -14,10 +18,7 @@ export const quizProgress = {
 };
 
 export const testProgress = {
-  dep_it:    { attemptsToday: 0, lastScore: null, passed: false },
-  dep_hr:    { attemptsToday: 0, lastScore: null, passed: false },
-  dep_fin:   { attemptsToday: 0, lastScore: null, passed: false },
-  dep_sales: { attemptsToday: 0, lastScore: null, passed: false },
+  dep_it: { attemptsToday: 0, lastScore: null, passed: false }
 };
 
 export const formationStatus = {
@@ -49,9 +50,15 @@ export const progressOverTime = [
 ];
 
 export const ssiOpened = {
-  dep_it: [], dep_hr: [], dep_fin: [], dep_sales: [],
+  dep_it: [],
+  dep_hr: [],
+  dep_fin: [],
+  dep_sales: [],
 };
 
 export const ssiAccepted = {
-  dep_it: false, dep_hr: false, dep_fin: false, dep_sales: false,
+  dep_it: false,
+  dep_hr: false,
+  dep_fin: false,
+  dep_sales: false,
 };

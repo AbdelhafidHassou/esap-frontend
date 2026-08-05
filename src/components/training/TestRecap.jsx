@@ -1,91 +1,183 @@
-import { AlertCircle, CheckCircle2, Clock, RotateCcw, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import {
+  AlertCircle,
+  Calendar,
+  Target,
+  ArrowRight,
+  RotateCcw,
+} from "lucide-react";
+import { ConfirmModal } from "@/components/training/ConfirmModal";
+import { TestResultCard } from "@/components/training/TestResultCard";
 
 export function TestRecap({ test, onStart, onContinue }) {
-  const { status, attemptsToday, maxAttemptsPerDay, lastScore, passed } = test;
+  const [showResult, setShowResult] = useState(false);
+  const {
+    status,
+    attemptsToday,
+    maxAttemptsPerDay,
+    lastScore,
+    passed,
+  } = test;
 
   const attemptsLeft = maxAttemptsPerDay - attemptsToday;
-  const noAttemptsLeft = attemptsLeft <= 0;
 
-  // test verrouillé (quiz pas tous réussis)
   if (status === "locked") {
     return (
-      <div className="flex items-center gap-3 rounded-sm border border-border bg-muted/30 p-5 text-sm text-muted-foreground">
-        <AlertCircle className="h-5 w-5 shrink-0" />
+      <div className="flex items-center gap-3 rounded-lg border border-border bg-muted/40 p-5 text-sm text-muted-foreground">
+        <AlertCircle className="h-5 w-5" />
         Terminez tous les modules et leurs quiz pour débloquer le test final.
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Bloc infos */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-sm border border-border p-4">
-          <p className="text-xs text-muted-foreground">Tentatives aujourd'hui</p>
-          <p className="mt-1 text-2xl font-semibold text-foreground">
-            {attemptsToday}/{maxAttemptsPerDay}
-          </p>
-        </div>
-        <div className="rounded-sm border border-border p-4">
-          <p className="text-xs text-muted-foreground">Dernier score</p>
-          <p className="mt-1 text-2xl font-semibold text-foreground">
-            {lastScore != null ? `${lastScore}%` : "- - -"}
-          </p>
-        </div>
-        <div className="rounded-sm border border-border p-4">
-          <p className="text-xs text-muted-foreground">Résultat</p>
-          <p className={`mt-1 text-2xl font-semibold ${
-            passed ? "text-success" : lastScore != null ? "text-danger" : "text-muted-foreground"
-          }`}>
-            {passed ? "Réussi" : lastScore != null ? "Échoué" : "- - -"}
-          </p>
-        </div>
-      </div>
+    <div className="w-full overflow-hidden rounded-sm border border-gray-300">
 
-      {/* Règles */}
-      <div className="rounded-sm border border-border bg-muted/20 p-4 text-sm text-muted-foreground">
-        <p className="flex items-center gap-2">
-          <Clock className="h-4 w-4" /> 15 questions · 30 minutes · seuil de réussite 80 % · 3 tentatives par jour
-        </p>
-      </div>
+      <div
+        className="relative overflow-hidden px-8 py-10"
+        style={{
+          backgroundImage: "url('https://images.unsplash.com/vector-1783427992596-c5b4900384d9?q=80&w=1511&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-platform-brand/15" />
+        <div className="relative z-10">
+          <p className="text-sm text-black">
+            Évaluation notée
+          </p>
 
-      {/* Bouton adapté à l'état */}
-      <div>
-        {passed ? (
-          <button
-            onClick={onContinue}
-            className="flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
-          >
-            Continuer vers les conditions SSI <ArrowRight className="h-4 w-4" />
-          </button>
-        ) : noAttemptsLeft ? (
-          <div className="space-y-2">
+          <h1 className="mt-2 text-4xl font-bold">
+            Test final
+          </h1>
+
+          <p className="mt-4 max-w-xl text-sm text-black">
+            15 questions · seuil de réussite 80 % · réparties sur tous les modules.
+          </p>
+
+          {passed ? (
+            <button
+              onClick={onContinue}
+              className="mt-8 inline-flex items-center gap-2 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+            >
+              Continuer
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          ) : attemptsLeft <= 0 ? (
             <button
               disabled
-              className="cursor-not-allowed rounded-sm bg-muted px-5 py-2.5 text-sm font-medium text-muted-foreground"
+              className="mt-8 rounded-sm bg-muted px-6 py-3 text-sm font-medium text-muted-foreground"
             >
-              Passer le test
+              Tentatives épuisées
             </button>
-            <p className="text-sm text-danger">
-              Vous avez épuisé vos 3 tentatives du jour. Réessayez demain.
-            </p>
-          </div>
-        ) : lastScore != null ? (
-          <button
-            onClick={onStart}
-            className="flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
-          >
-            <RotateCcw className="h-4 w-4" /> Réessayer le test ({attemptsLeft} restante{attemptsLeft > 1 ? "s" : ""})
-          </button>
-        ) : (
-          <button
-            onClick={onStart}
-            className="flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
-          >
-            Passer le test <ArrowRight className="h-4 w-4" />
-          </button>
-        )}
+          ) : lastScore != null ? (
+            <button
+              onClick={onStart}
+              className="mt-8 inline-flex items-center gap-2 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+            >
+              <RotateCcw className="h-4 w-4" />
+              Réessayer
+            </button>
+          ) : (
+            <button
+              onClick={onStart}
+              className="mt-8 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90 cursor-pointer"
+            >
+              Commencer le test
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+
+      <div className="grid gap-8 p-8 md:grid-cols-[1fr_280px]">
+
+        <div className="space-y-4">
+          {lastScore != null ? (
+            <div
+              className={`rounded-sm border p-5 ${passed
+                ? "border-green-200  from-green-100 to-green-50"
+                : "border-red-200 from-red-100 to-red-50 bg-danger/20"
+                }`}
+            >
+              <h3
+                className={`text-lg font-semibold text-black"
+                  }`}
+              >
+                {passed ? "Vous avez réussi !" : "Vous avez échoué"}
+              </h3>
+
+              <p className="mt-1 text-sm text-black">
+                Pour réussir, vous devez obtenir au moins 80%.
+              </p>
+
+              <div className="mt-4 flex items-center gap-4">
+                <span
+                  className={`text-4xl font-bold ${passed ? "text-green-700" : "text-red-700"
+                    }`}
+                >
+                  {lastScore}%
+                </span>
+
+                <button
+                  onClick={() => setShowResult(true)}
+                  className="rounded-sm border bg-background px-4 py-2 text-sm font-medium hover:bg-muted"
+                >
+                  Voir les résultats
+                </button>
+              </div>
+
+              <p className="mt-3 text-sm text-muted-foreground">
+                Dernière tentative
+              </p>
+            </div>
+          ) : (
+            <p className="text-sm text-black font-semibold">
+              Vous devez réussir ce test pour valider votre formation.
+            </p>
+          )}
+        </div>
+
+        <div className="rounded-sm border border-gray-300 p-6">
+
+          <h3 className="font-semibold text-black">
+            À quoi s'attendre
+          </h3>
+
+          <div className="mt-5 space-y-4">
+
+            <div className="flex items-center gap-3 text-sm text-black">
+              <Target className="h-4 w-4" />
+              {attemptsLeft}/{maxAttemptsPerDay} tentatives restantes
+            </div>
+
+            <div className="flex items-center gap-3 text-sm text-black">
+              <Calendar className="h-4 w-4" />
+              30 minutes chronométrées
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <ConfirmModal
+        open={showResult}
+        title={null}
+        maxWidth="max-w-lg"
+        hideFooter
+      >
+        {test.lastResult && (
+          <div>
+            <button
+              onClick={() => setShowResult(false)}
+              className="absolute right-5 top-5 text-muted-foreground hover:text-foreground"
+            >
+              ✕
+            </button>
+            <TestResultCard result={test.lastResult} elapsed={null} />
+          </div>
+        )}
+      </ConfirmModal>
+    </div >
   );
 }

@@ -3,3 +3,4 @@ export * from "./departments"
 export * from "./progress"
 export * from "./platform"
 export * from "./quizzes"
+export * from "./testBank";

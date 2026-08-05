@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getChapterContent } from "@/data/api";
-import { CheckCircle2, ExternalLink, FileText } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 
 function ChapterBody({ contentType, body }) {
   if (!body) {
@@ -88,75 +88,46 @@ function ChapterBody({ contentType, body }) {
   }
 }
 
-function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${m}:${sec.toString().padStart(2, "0")}`;
-}
-
-export function ChapterView({ chapterId, isCompleted, onComplete }) {
+export function ChapterView({ chapterId, isCompleted, onMarkRead, onStateChange }) {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [remaining, setRemaining] = useState(null);
+  const [markedThisView, setMarkedThisView] = useState(false);
 
   useEffect(() => {
     let alive = true;
     setLoading(true);
     setContent(null);
+    setMarkedThisView(false);
     getChapterContent(chapterId).then((data) => {
       if (!alive) return;
       setContent(data);
-
-      setRemaining(isCompleted ? 0 : 10); //data?.readingTimerSeconds ?? 180);
+      setRemaining(isCompleted ? 0 : 10 /* data?.readingTimerSeconds ?? 180 */);
       setLoading(false);
     });
     return () => { alive = false; };
-  }, [chapterId, isCompleted]);
+  }, [chapterId]);
 
   useEffect(() => {
     if (remaining === null || remaining <= 0) return;
-    const t = setInterval(() => {
-      setRemaining((r) => (r <= 1 ? 0 : r - 1));
-    }, 1000);
+    const t = setInterval(() => setRemaining((r) => (r <= 1 ? 0 : r - 1)), 1000);
     return () => clearInterval(t);
   }, [remaining]);
+
+  useEffect(() => {
+    if (remaining === 0 && !isCompleted && !markedThisView) {
+      setMarkedThisView(true);
+      onMarkRead?.(chapterId);
+    }
+  }, [remaining, isCompleted, markedThisView, chapterId, onMarkRead]);
+
+  useEffect(() => {
+    const canAdvance = remaining === 0 || isCompleted;
+    onStateChange?.({ remaining, canAdvance, loading });
+  }, [remaining, isCompleted, loading, onStateChange]);
 
   if (loading) return <p className="text-sm text-muted-foreground">Chargement du chapitre…</p>;
   if (!content) return <p className="text-sm text-muted-foreground">Chapitre introuvable.</p>;
 
-  const canComplete = remaining === 0;
-
-  return (
-    <div className="space-y-8">
-      <ChapterBody contentType={content.contentType} body={content.body} />
-
-      <div className="flex flex-col items-start gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-        {isCompleted ? (
-          <span className="flex items-center gap-2 text-sm font-medium text-success">
-            <CheckCircle2 className="h-5 w-5" /> Chapitre terminé
-          </span>
-        ) : (
-          <span className="text-sm text-muted-foreground">
-            {canComplete
-              ? "Vous pouvez marquer ce chapitre comme terminé."
-              : `Temps de lecture restant : ${formatTime(remaining)}`}
-          </span>
-        )}
-
-        {!isCompleted && (
-          <button
-            type="button"
-            disabled={!canComplete}
-            onClick={() => onComplete(chapterId)}
-            className={`rounded-sm px-5 py-2.5 text-sm font-medium transition ${canComplete
-                ? "bg-platform-brand text-white hover:opacity-90"
-                : "cursor-not-allowed bg-muted text-muted-foreground"
-              }`}
-          >
-            Marquer comme terminé
-          </button>
-        )}
-      </div>
-    </div>
-  );
+  return <ChapterBody contentType={content.contentType} body={content.body} />;
 }
