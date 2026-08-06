@@ -74,16 +74,39 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
 
   if (phase === "intro") {
     return (
-      <div className="rounded-sm border border-border p-6">
-        <p className="text-sm text-muted-foreground">
-          {questions.length} questions · réussite à 100 % requise · pas de retour en arrière.
-        </p>
-        <button
-          onClick={() => setPhase("answering")}
-          className="mt-4 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
+      <div className="w-full overflow-hidden rounded-sm border border-border">
+        <div
+          className="relative overflow-hidden px-8 py-10"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/vector-1783427992596-c5b4900384d9?q=80&w=1511&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-          Commencer le quiz
-        </button>
+          <div className="absolute inset-0 bg-platform-brand/15" />
+          <div className="relative z-10">
+            <p className="text-sm text-black">Évaluation</p>
+            <h1 className="mt-2 text-4xl font-bold text-black">Quiz du module</h1>
+            <p className="mt-4 max-w-xl text-sm text-black">
+              {questions.length} questions · réussite 100 % requise · pas de retour en arrière.
+            </p>
+            <button
+              onClick={() => setPhase("answering")}
+              className="mt-8 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+            >
+              Commencer le quiz
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-card p-8">
+          <h3 className="mb-4 font-semibold text-foreground">À quoi s'attendre</h3>
+          <div className="space-y-3 text-sm text-foreground">
+            <p>Chaque bonne/mauvaise réponse est corrigée immédiatement.</p>
+            <p>Un indice s'affiche en cas d'erreur.</p>
+            <p>Réussite requise à 100 % pour débloquer le module suivant.</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -93,32 +116,60 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
     const total = questions.length;
     const score = Math.round((correctCount / total) * 100);
     const passed = score === 100;
+
     return (
-      <div className="space-y-6">
-        <div className={`rounded-sm border p-5 ${passed ? "border-success/30 bg-success/10" : "border-danger/30 bg-danger/10"}`}>
-          <p className={`text-lg font-semibold ${passed ? "text-success" : "text-danger"}`}>
-            {passed ? "Quiz réussi !" : "Quiz échoué"}
-          </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Score : {score}% ({correctCount}/{total} bonnes réponses)
-          </p>
+      <div className="w-full overflow-hidden rounded-sm border border-border">
+        <div
+          className="relative overflow-hidden px-8 py-10"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/vector-1783427992596-c5b4900384d9?q=80&w=1511&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 bg-platform-brand/15" />
+          <div className="relative z-10">
+            <p className="text-sm text-black">Résultat</p>
+            <h1 className="mt-2 text-4xl font-bold text-black">Quiz du module</h1>
+            <p className="mt-4 max-w-xl text-sm text-black">
+              {correctCount}/{total} bonnes réponses - réussite 100 % requise.
+            </p>
+
+            {passed ? (
+              <button
+                onClick={() => onPassed?.()}
+                className="mt-8 inline-flex items-center gap-2 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+              >
+                Passer au module suivant <ArrowRight className="h-4 w-4" />
+              </button>
+            ) : (
+              <button
+                onClick={handleRetry}
+                className="mt-8 inline-flex items-center gap-2 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
+              >
+                <RotateCcw className="h-4 w-4" /> Recommencer le quiz
+              </button>
+            )}
+          </div>
         </div>
 
-        {passed ? (
-          <button
-            onClick={() => onPassed?.()}
-            className="flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
+        <div className="bg-card p-8">
+          <div
+            className={`rounded-sm border p-5 ${passed ? "border-green-200 bg-success/10" : "border-red-200 bg-danger/10"}`}
           >
-            Passer au module suivant <ArrowRight className="h-4 w-4" />
-          </button>
-        ) : (
-          <button
-            onClick={handleRetry}
-            className="flex items-center gap-2 rounded-sm bg-platform-brand px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
-          >
-            <RotateCcw className="h-4 w-4" /> Recommencer le quiz
-          </button>
-        )}
+            <h3 className={`text-lg font-semibold ${passed ? "text-green-700" : "text-red-700"}`}>
+              {passed ? "Vous avez réussi !" : "Vous avez échoué"}
+            </h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Réussite à 100 % requise pour débloquer le module suivant.
+            </p>
+            <div className="mt-4 flex items-center gap-4">
+              <span className={`text-4xl font-bold ${passed ? "text-green-700" : "text-red-700"}`}>
+                {score}%
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -164,9 +215,8 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
               disabled={!!feedback}
               className={`flex items-center gap-4 rounded-sm border p-4 text-left text-sm transition ${cls}`}
             >
-              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border text-sm font-semibold ${
-                isSel && !feedback ? "border-platform-brand bg-platform-brand text-white" : "border-border text-muted-foreground"
-              }`}>
+              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border text-sm font-semibold ${isSel && !feedback ? "border-platform-brand bg-platform-brand text-white" : "border-border text-muted-foreground"
+                }`}>
                 {LETTERS[i]}
               </span>
               <span className="flex-1">{o.text}</span>
@@ -189,15 +239,13 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
         </div>
       )}
 
-      {/* action */}
       <div className="flex justify-end border-t border-border pt-4">
         {!feedback ? (
           <button
             onClick={handleValidate}
             disabled={selected.length === 0}
-            className={`rounded-sm px-5 py-2.5 text-sm font-medium transition ${
-              selected.length > 0 ? "bg-platform-brand text-white hover:opacity-90" : "cursor-not-allowed bg-muted text-muted-foreground"
-            }`}
+            className={`rounded-sm px-5 py-2.5 text-sm font-medium transition ${selected.length > 0 ? "bg-platform-brand text-white hover:opacity-90" : "cursor-not-allowed bg-muted text-muted-foreground"
+              }`}
           >
             Valider
           </button>

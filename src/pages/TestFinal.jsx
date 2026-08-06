@@ -129,8 +129,8 @@ export default function TestFinal() {
 
     const lowTime = remaining <= 60;
     return (
-        <div className="min-h-screen bg-white">
-            <header className="sticky top-0 z-10 h-18 flex items-center justify-between border-b border-border bg-white px-4 py-3 md:px-8">
+        <div className="min-h-screen bg-background">
+            <header className="sticky top-0 z-10 h-18 flex items-center justify-between border-b border-border bg-card px-4 py-3 md:px-8">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => navigate(`/formation/${id}`)}
@@ -173,7 +173,7 @@ export default function TestFinal() {
                                             onClick={() => toggleOption(q, o.id)}
                                             className="flex cursor-pointer items-center gap-3 py-2 text-md"
                                         >
-                                            <span className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-2 ${isSel ? "border-platform-brand" : "border-border-strong"
+                                            <span className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full border-2 ${isSel ? "border-platform-brand" : "border-border-strong"
                                                 }`}>
                                                 {isSel && <span className="h-2 w-2 rounded-full bg-platform-brand" />}
                                             </span>
@@ -199,7 +199,7 @@ export default function TestFinal() {
                             type="checkbox"
                             checked={agreed}
                             onChange={(e) => setAgreed(e.target.checked)}
-                            className="h-4 w-4 accent-[var(--platform-brand)]"
+                            className="h-4 w-4 accent-platform-brand"
                         />
                         <span>Moi, <span className="font-bold">{employee?.firstName} {employee?.lastName}</span>, je comprends et j'accepte.</span>
                     </label>

@@ -4,6 +4,7 @@ import { AppDataProvider, useAppData } from "./context/AppDataContext";
 import { useEffect } from "react";
 import { applyBranding } from "./lib/branding";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function BrandignApplier() {
   const { branding } = useAppData()
@@ -16,7 +17,9 @@ export default function App() {
     <AuthProvider>
       <AppDataProvider>
         <BrandignApplier />
-        <RouterProvider router={router} />
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </AppDataProvider>
     </AuthProvider>
   )

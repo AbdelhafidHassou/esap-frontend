@@ -12,7 +12,7 @@ export default function AppLayout() {
         <SidebarProvider>
             <AppSidebar />
             <div className="flex flex-1 flex-col min-w-0">
-                <header className="sticky top-0 z-50 flex h-18 items-center gap-4 border-b bg-white px-4">
+                <header className="sticky top-0 z-50 flex h-18 items-center gap-4 border-b bg-card px-4">
                     <SidebarTrigger />
                     <div className="hidden md:block flex-1 max-w-md">
                         <SearchBar />
@@ -34,7 +34,7 @@ export default function AppLayout() {
                         )}
                     </div>
                 </header>
-                <main className="flex-1 overflow-x-hidden bg-[#f8fafc] p-4 md:p-8 lg:p-12">
+                <main className="flex-1 overflow-x-hidden bg-background p-4 md:p-8 lg:p-12">
                     <Outlet />
                 </main>
             </div>

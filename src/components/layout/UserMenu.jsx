@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ChevronDown, User, LifeBuoy, LogOut } from "lucide-react"
+import { ChevronDown, User, LifeBuoy, LogOut, Moon, Sun } from "lucide-react"
 import {
     DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
     DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
@@ -12,11 +12,13 @@ import {
     AlertDialogCancel, AlertDialogAction,
 } from "@/components/ui/alert-dialog"
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function UserMenu({ firstName, lastName, email }) {
     const navigate = useNavigate()
     const [confirmOpen, setConfirmOpen] = useState(false)
     const { logout } = useAuth();
+    const { isDark, toggleTheme } = useTheme();
 
     return (
         <>
@@ -31,7 +33,7 @@ export default function UserMenu({ firstName, lastName, email }) {
                     <DropdownMenuGroup>
                         <DropdownMenuLabel className="font-normal">
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium text-black">{firstName} {lastName}</span>
+                                <span className="truncate font-medium text-foreground">{firstName} {lastName}</span>
                                 <span className="text-muted-foreground truncate text-xs">{email}</span>
                             </div>
                         </DropdownMenuLabel>
@@ -40,6 +42,10 @@ export default function UserMenu({ firstName, lastName, email }) {
                     <DropdownMenuGroup>
                         <DropdownMenuItem onClick={() => navigate("/account")} className="transition-colors duration-300 ease-in-out">
                             <User className="h-4 w-4" /> Mon compte
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={toggleTheme}>
+                            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                            {isDark ? "Mode clair" : "Mode sombre"}
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => navigate("/support")} className="transition-colors duration-300 ease-in-out">
                             <LifeBuoy className="h-4 w-4" /> Support

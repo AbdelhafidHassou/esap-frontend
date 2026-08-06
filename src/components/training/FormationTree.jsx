@@ -3,7 +3,7 @@ import { CheckCircle2, CircleDot, Lock, Circle, ChevronDown, ChevronRight } from
 const NODE_ICON = {
     completed: { Icon: CheckCircle2, className: "text-platform-brand" },
     in_progress: { Icon: CircleDot, className: "text-platform-brand/60" },
-    unlocked: { Icon: Circle, className: "text-gray-600" },
+    unlocked: { Icon: Circle, className: "text-muted-foreground" },
     locked: { Icon: Lock, className: "text-muted-foreground" },
 };
 

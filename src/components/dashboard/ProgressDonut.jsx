@@ -3,20 +3,20 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useThemeColors } from "@/hooks/useThemeColors";
 
 export default function ProgressDonut({ total = 0, validated = 0, inProgress = 0 }) {
-  const { success, warning, primaryLight } = useThemeColors()
+  const { success, warning } = useThemeColors()
   const remaining = Math.max(total - validated - inProgress, 0)
   const completion = total > 0 ? Math.round((validated / total) * 100) : 0
 
   const data = [
     { name: "Validés", value: validated, color: success },
     { name: "En cours", value: inProgress, color: warning },
-    { name: "Restants", value: remaining, color: primaryLight },
+    { name: "Restants", value: remaining, color: "var(--border-color)" },
   ]
 
   return (
     <Card className="rounded-sm bg-card shadow-lg">
       <CardContent className="flex flex-col items-center p-6">
-        <p className="text-primary mb-4 self-start text-lg font-semibold">Progression des modules</p>
+        <p className="text-foreground mb-4 self-start text-lg font-semibold">Progression des modules</p>
         <div className="relative h-50 w-full min-w-0 overflow-hidden">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -27,7 +27,7 @@ export default function ProgressDonut({ total = 0, validated = 0, inProgress = 0
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="text-4xl font-bold text-primary">{completion}%</p>
+            <p className="text-4xl font-bold text-foreground">{completion}%</p>
             <p className="text-muted-foreground text-sm">complétés</p>
           </div>
         </div>

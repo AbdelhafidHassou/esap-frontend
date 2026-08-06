@@ -13,7 +13,7 @@ export default function RiskGauge({ value = 0, tier }) {
     return (
         <Card className="rounded-sm bg-card shadow-lg">
             <CardContent className="flex flex-col items-center p-6">
-                <p className="text-primary mb-4 self-start text-lg font-semibold">Score de performance</p>
+                <p className="text-foreground mb-4 self-start text-lg font-semibold">Score de performance</p>
                 <div className="relative h-50 w-full min-w-0 overflow-hidden">
                     <ResponsiveContainer width="100%" height="100%">
                         <RadialBarChart cx="50%" cy="70%" innerRadius="90%" outerRadius="130%"
@@ -29,8 +29,8 @@ export default function RiskGauge({ value = 0, tier }) {
                         </RadialBarChart>
                     </ResponsiveContainer>
                     <div className="absolute inset-x-0 bottom-6 flex flex-col items-center">
-                        <p className="text-4xl font-bold text-primary">{value}%</p>
-                        <p className="text-sm text-primary">{TIER_LABELS[tier] ?? tier}</p>
+                        <p className="text-4xl font-bold text-foreground">{value}%</p>
+                        <p className="text-sm text-muted-foreground">{TIER_LABELS[tier] ?? tier}</p>
                     </div>
                 </div>
             </CardContent>

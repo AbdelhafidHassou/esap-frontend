@@ -11,6 +11,7 @@ import { TestResultCard } from "@/components/training/TestResultCard";
 
 export function TestRecap({ test, onStart, onContinue }) {
   const [showResult, setShowResult] = useState(false);
+  const [showNewAttempt, setShowNewAttempt] = useState(false);
   const {
     status,
     attemptsToday,
@@ -31,8 +32,7 @@ export function TestRecap({ test, onStart, onContinue }) {
   }
 
   return (
-    <div className="w-full overflow-hidden rounded-sm border border-gray-300">
-
+    <div className="w-full overflow-hidden rounded-sm border border-border">
       <div
         className="relative overflow-hidden px-8 py-10"
         style={{
@@ -47,7 +47,7 @@ export function TestRecap({ test, onStart, onContinue }) {
             Évaluation notée
           </p>
 
-          <h1 className="mt-2 text-4xl font-bold">
+          <h1 className="mt-2 text-4xl font-bold text-black">
             Test final
           </h1>
 
@@ -72,7 +72,7 @@ export function TestRecap({ test, onStart, onContinue }) {
             </button>
           ) : lastScore != null ? (
             <button
-              onClick={onStart}
+              onClick={() => setShowNewAttempt(true)}
               className="mt-8 inline-flex items-center gap-2 rounded-sm bg-platform-brand px-6 py-3 text-sm font-medium text-white hover:opacity-90"
             >
               <RotateCcw className="h-4 w-4" />
@@ -90,7 +90,6 @@ export function TestRecap({ test, onStart, onContinue }) {
       </div>
 
       <div className="grid gap-8 p-8 md:grid-cols-[1fr_280px]">
-
         <div className="space-y-4">
           {lastScore != null ? (
             <div
@@ -99,14 +98,11 @@ export function TestRecap({ test, onStart, onContinue }) {
                 : "border-red-200 from-red-100 to-red-50 bg-danger/20"
                 }`}
             >
-              <h3
-                className={`text-lg font-semibold text-black"
-                  }`}
-              >
+              <h3 className="text-lg font-semibold text-foreground">
                 {passed ? "Vous avez réussi !" : "Vous avez échoué"}
               </h3>
 
-              <p className="mt-1 text-sm text-black">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Pour réussir, vous devez obtenir au moins 80%.
               </p>
 
@@ -131,35 +127,46 @@ export function TestRecap({ test, onStart, onContinue }) {
               </p>
             </div>
           ) : (
-            <p className="text-sm text-black font-semibold">
+            <p className="text-sm text-foreground font-semibold">
               Vous devez réussir ce test pour valider votre formation.
             </p>
           )}
         </div>
 
-        <div className="rounded-sm border border-gray-300 p-6">
-
-          <h3 className="font-semibold text-black">
+        <div className="rounded-sm border border-border p-6">
+          <h3 className="font-semibold text-foreground">
             À quoi s'attendre
           </h3>
 
           <div className="mt-5 space-y-4">
-
-            <div className="flex items-center gap-3 text-sm text-black">
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <Target className="h-4 w-4" />
               {attemptsLeft}/{maxAttemptsPerDay} tentatives restantes
             </div>
 
-            <div className="flex items-center gap-3 text-sm text-black">
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <Calendar className="h-4 w-4" />
               30 minutes chronométrées
             </div>
-
           </div>
 
         </div>
 
       </div>
+      <ConfirmModal
+        open={showNewAttempt}
+        title="Recommencer le test ?"
+        confirmLabel="Continuer"
+        onConfirm={() => { setShowNewAttempt(false); onStart(); }}
+        onCancel={() => setShowNewAttempt(false)}
+      >
+        <p className="text-sm text-muted-foreground">
+          Une nouvelle tentative remplacera votre soumission précédente. Elle ne remplacera votre note que si elle est meilleure.
+        </p>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Il vous restera <span className="font-semibold text-foreground">{attemptsLeft - 1} tentative{attemptsLeft - 1 > 1 ? "s" : ""}</span> après celle-ci.
+        </p>
+      </ConfirmModal>
       <ConfirmModal
         open={showResult}
         title={null}

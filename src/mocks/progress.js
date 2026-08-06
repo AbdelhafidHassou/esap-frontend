@@ -18,7 +18,7 @@ export const quizProgress = {
 };
 
 export const testProgress = {
-  dep_it: { attemptsToday: 0, lastScore: null, passed: false }
+  dep_it: { attemptsToday: 0, lastScore: null, passed: false },
 };
 
 export const formationStatus = {

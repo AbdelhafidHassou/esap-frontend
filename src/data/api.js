@@ -486,3 +486,16 @@ export async function submitTest(testId, deptId, attemptNumber, answers) {
 
   return { score, passed, totalCorrect, totalQuestions, perModule, results };
 }
+
+export async function openSsiDocument(deptId, documentId) {
+  await delay();
+  const list = ssiOpened[deptId] ?? (ssiOpened[deptId] = []);
+  if (!list.includes(documentId)) list.push(documentId);
+  return { success: true };
+}
+
+export async function acceptSsi(deptId) {
+  await delay();
+  ssiAccepted[deptId] = true;
+  return { success: true };
+}

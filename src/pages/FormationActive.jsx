@@ -12,6 +12,8 @@ import {
     Sheet, SheetContent, SheetTrigger, SheetTitle,
 } from "@/components/ui/sheet";
 import { TestRecap } from "@/components/training/TestRecap";
+import { SsiView } from "@/components/training/SsiView";
+import { ValidationView } from "@/components/training/ValidationView";
 
 function formatTime(s) {
     if (s == null) return "";
@@ -96,6 +98,14 @@ export default function FormationActive() {
         await markQuizPassed(quizId);
         const fresh = await getFormationDetails(id);
         setFormation(fresh);
+
+        const freshFlat = flattenTree(fresh);
+        const currentIdx = freshFlat.findIndex((e) => e.id === quizId);
+        const next = freshFlat[currentIdx + 1];
+        if (next && next.node.status !== "locked") {
+            setSelectedId(next.id);
+            if (next.moduleId) setOpenModuleId(next.moduleId);
+        }
     };
 
     if (loading) return <div className="p-6">Chargement…</div>;
@@ -105,7 +115,7 @@ export default function FormationActive() {
 
     return (
         <div className="flex h-screen flex-col bg-background">
-            <header className="flex h-18 shrink-0 items-center gap-4 border-b border-border bg-white px-4">
+            <header className="flex h-18 shrink-0 items-center gap-4 border-b border-border bg-card px-4">
                 <Sheet open={treeOpen} onOpenChange={setTreeOpen}>
                     <SheetTrigger className="lg:hidden">
                         <Menu className="h-5 w-5 text-muted-foreground" />
@@ -168,7 +178,7 @@ export default function FormationActive() {
             </header>
 
             <div className="flex min-h-0 flex-1">
-                <aside className="hidden w-100 shrink-0 overflow-y-auto border-r border-border bg-white lg:block">
+                <aside className="hidden w-100 shrink-0 overflow-y-auto border-r border-border bg-card lg:block">
                     <FormationTree
                         formation={formation}
                         selectedId={selectedId}
@@ -178,68 +188,85 @@ export default function FormationActive() {
                     />
                 </aside>
 
-                <main className="flex min-w-0 flex-1 flex-col bg-white">
-                    <div className="flex-1 overflow-y-auto">
-                        <div className={
-                            (selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType))
-                                || selected?.type === "quiz" || selected?.type === "test"
-                                ? "mx-auto max-w-7xl px-6 py-6 md:px-10 md:py-10"
-                                : "mx-auto max-w-3xl px-6 py-6 md:px-10 md:py-10"
-                        }>
-                            <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                                {selected?.type === "quiz" ? "Évaluation" : selected?.type}
-                            </p>
-                            <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
-                                {selected?.node.title ?? (
-                                    selected?.type === "quiz" ? "Quiz du module"
-                                        : selected?.type === "test" ? "Test final"
-                                            : selected?.type === "ssi" ? "Conditions SSI"
-                                                : selected?.type === "validation" ? "Validation"
-                                                    : selected?.type
-                                )}
-                            </h1>
-
-                            {selected?.type === "chapter" && (
-                                <ChapterView
-                                    key={selected.id}
-                                    chapterId={selected.id}
+                <main className="flex min-w-0 flex-1 flex-col bg-background">
+                    {selected?.type === "ssi" || selected?.type === "validation" ? (
+                        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+                            {selected?.type === "ssi" ? (
+                                <SsiView
+                                    deptId={id}
+                                    ssi={formation.ssi}
                                     isCompleted={selected.node.status === "completed"}
-                                    onMarkRead={handleMarkRead}
-                                    onStateChange={handleChapterState}
+                                    onAccepted={async () => {
+                                        const fresh = await getFormationDetails(id);
+                                        setFormation(fresh);
+                                        handleSelect("validation");
+                                    }}
                                 />
-                            )}
-
-                            {selected?.type === "quiz" && (
-                                <QuizView
-                                    quizId={selected.id}
-                                    isCompleted={selected.node.status === "completed"}
-                                    onPassed={() => handleQuizPassed(selected.id)}
-                                />
-                            )}
-
-                            {selected?.type === "test" && (
-                                <TestRecap
-                                    test={formation.test}
-                                    onStart={() => navigate(`/test/${id}`)}
-                                    onContinue={() => handleSelect("ssi")}
-                                />
-                            )}
-
-                            {!["chapter", "quiz", "test"].includes(selected?.type) && (
-                                <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
-                                    Contenu « {selected?.type} » - à venir
-                                </div>
+                            ) : (
+                                <ValidationView formation={formation} employee={employee} />
                             )}
                         </div>
-                    </div>
+                    ) : (
+                        <div className="flex-1 overflow-y-auto">
+                            <div className={
+                                (selected?.type === "chapter" && ["video", "pdf", "infographic"].includes(selected?.node?.contentType))
+                                    || selected?.type === "quiz" || selected?.type === "test"
+                                    ? "mx-auto max-w-7xl px-6 py-6 md:px-10 md:py-10"
+                                    : "mx-auto max-w-3xl px-6 py-6 md:px-10 md:py-10"
+                            }>
+                                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                                    {selected?.type === "quiz" ? "Évaluation" : selected?.type}
+                                </p>
+                                <h1 className="mt-1 mb-6 text-2xl font-bold text-foreground">
+                                    {selected?.node.title ?? (
+                                        selected?.type === "quiz" ? "Quiz du module"
+                                            : selected?.type === "test" ? "Test final"
+                                                : selected?.type
+                                    )}
+                                </h1>
+
+                                {selected?.type === "chapter" && (
+                                    <ChapterView
+                                        key={selected.id}
+                                        chapterId={selected.id}
+                                        isCompleted={selected.node.status === "completed"}
+                                        onMarkRead={handleMarkRead}
+                                        onStateChange={handleChapterState}
+                                    />
+                                )}
+
+                                {selected?.type === "quiz" && (
+                                    <QuizView
+                                        quizId={selected.id}
+                                        isCompleted={selected.node.status === "completed"}
+                                        onPassed={() => handleQuizPassed(selected.id)}
+                                    />
+                                )}
+
+                                {selected?.type === "test" && (
+                                    <TestRecap
+                                        test={formation.test}
+                                        onStart={() => navigate(`/test/${id}`)}
+                                        onContinue={() => handleSelect("ssi")}
+                                    />
+                                )}
+
+                                {!["chapter", "quiz", "test"].includes(selected?.type) && (
+                                    <div className="rounded-sm border border-dashed border-border p-8 text-center text-muted-foreground">
+                                        Contenu « {selected?.type} » - à venir
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
                     {selected?.type === "chapter" && !chapterState.loading && (
-                        <div className="flex shrink-0 items-center justify-between border-t border-border bg-white px-6 py-4 md:px-10">
+                        <div className="flex shrink-0 items-center justify-between border-t border-border bg-card px-6 py-4 md:px-10">
                             {chapterState.canAdvance ? (
                                 <span className="flex items-center gap-1 text-muted-foreground transition duration-500 ease-in-out"><Eye className="h-4 w-4" /> <span className="text-sm font-medium text-muted-foreground">0:00</span></span>
                             ) : (
                                 <span className="flex items-center gap-1 text-muted-foreground transition duration-500 ease-in-out">
-                                    <EyeClosed className="h-4 w-4"/> <span className="text-sm font-medium text-muted-foreground">{formatTime(chapterState.remaining)}</span>
+                                    <EyeClosed className="h-4 w-4" /> <span className="text-sm font-medium text-muted-foreground">{formatTime(chapterState.remaining)}</span>
                                 </span>
                             )}
                             <button

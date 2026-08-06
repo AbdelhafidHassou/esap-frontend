@@ -33,7 +33,7 @@ function ChapterBody({ contentType, body }) {
 
     case "video":
       return (
-        <div className="aspect-video w-full overflow-hidden rounded-sm bg-black">
+        <div className="w-full overflow-hidden rounded-sm bg-black" style={{ aspectRatio: "16/7" }}>
           <iframe
             className="h-full w-full"
             src={`https://www.youtube.com/embed/${body.videoId}`}
@@ -69,7 +69,7 @@ function ChapterBody({ contentType, body }) {
     case "pdf":
       return (
         <div className="space-y-3">
-          <div className="h-[70vh] w-full overflow-hidden rounded-sm border border-border">
+          <div className="h-[80vh] w-full overflow-hidden rounded-sm border border-border">
             <iframe src={body.url} title="Document PDF" className="h-full w-full" />
           </div>
           <a

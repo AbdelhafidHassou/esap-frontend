@@ -95,7 +95,7 @@ export default function Login() {
             Espace employé
           </p>
           <h1 className="mt-1 text-3xl font-bold text-foreground">
-            Heureux de vous revoir <span className="text-primary">!</span>
+            Heureux de vous revoir <span className="text-foreground">!</span>
           </h1>
           <p className="text-xs font-medium tracking-wide text-muted-foreground">
             Veuillez vous connecter à votre compte.

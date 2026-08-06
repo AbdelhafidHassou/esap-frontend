@@ -4,7 +4,6 @@ export function applyBranding(branding) {
 
   root.style.setProperty("--primary", branding.primaryColor)
   root.style.setProperty("--primary-light", hexToLight(branding.primaryColor))
-  root.style.setProperty("--sidebar", branding.primaryColor)
 
   if (branding.secondaryColor) {
     root.style.setProperty("--secondary-brand", branding.secondaryColor)

@@ -20,7 +20,7 @@ export function ConfirmModal({
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`relative w-full ${maxWidth} rounded-sm border border-border bg-white p-6 shadow-xl`}
+                className={`relative w-full ${maxWidth} rounded-sm border border-border bg-card p-6 shadow-xl`}
             >
                 {title && <h2 className="text-lg font-bold text-foreground">{title}</h2>}
 

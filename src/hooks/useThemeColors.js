@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { useTheme } from "@/context/ThemeContext"
 
 export function useThemeColors() {
+  const { isDark } = useTheme()
   const [colors, setColors] = useState({
     primary: "#7b2cbf",
     primaryLight: "#f3e8ff",
@@ -20,7 +22,7 @@ export function useThemeColors() {
       success: root.getPropertyValue("--success").trim() || "#10b981",
       warning: root.getPropertyValue("--warning").trim() || "#f59e0b",
     })
-  }, [])
+  }, [isDark])
 
   return colors
 }
