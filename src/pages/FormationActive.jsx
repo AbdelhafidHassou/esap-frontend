@@ -14,6 +14,7 @@ import {
 import { TestRecap } from "@/components/training/TestRecap";
 import { SsiView } from "@/components/training/SsiView";
 import { ValidationView } from "@/components/training/ValidationView";
+import { useTheme } from "@/context/ThemeContext";
 
 function formatTime(s) {
     if (s == null) return "";
@@ -35,6 +36,7 @@ export default function FormationActive() {
     const [selectedId, setSelectedId] = useState(null);
     const [openModuleId, setOpenModuleId] = useState(null);
     const { employee, branding, platform } = useAppData();
+    const { isDark } = useTheme();
     const progress = useMemo(
         () => (formation ? computeFormationProgress(formation) : { done: 0, total: 0, percent: 0 }),
         [formation]
@@ -143,9 +145,11 @@ export default function FormationActive() {
                     onClick={() => navigate("/dashboard")}
                     className="flex items-center gap-2 transition-opacity cursor-pointer"
                 >
-                    {platform?.logoUrl && (
-                        <img src={platform.logoUrl} alt={platform.name} className="h-14 w-auto object-contain" />
-                    )}
+                    <img
+                        src={isDark ? "/logos/mercure_logo_dark.png" : "/logos/mercure_logo_light.png"}
+                        alt="Mercure"
+                        className="h-14 w-auto object-contain"
+                    />
                 </button>
 
                 <span className="h-6 w-px bg-muted-foreground" />

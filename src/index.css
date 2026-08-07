@@ -129,7 +129,7 @@
     --muted: #26262a;
     --muted-foreground: var(--text-muted);
     --accent: var(--primary-light);
-    --accent-foreground: var(--primary);
+    --accent-foreground: var(--text-muted);
     --border: var(--border-color);
     --input: var(--border-color);
     --success: #34d399;

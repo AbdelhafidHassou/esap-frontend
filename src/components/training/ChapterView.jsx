@@ -102,7 +102,7 @@ export function ChapterView({ chapterId, isCompleted, onMarkRead, onStateChange 
     getChapterContent(chapterId).then((data) => {
       if (!alive) return;
       setContent(data);
-      setRemaining(isCompleted ? 0 : 10 /* data?.readingTimerSeconds ?? 180 */);
+      setRemaining(isCompleted ? 0 : (data?.readingTimerSeconds ?? 180));
       setLoading(false);
     });
     return () => { alive = false; };
