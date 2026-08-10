@@ -19,8 +19,8 @@ export default function Login() {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [countdown, setCountdown] = useState(0);
-  const [sending, setSending] = useState(false); // request in flight
-  const [verifying, setVerifying] = useState(false); // verify in flight
+  const [sending, setSending] = useState(false);
+  const [verifying, setVerifying] = useState(false);
 
   const isEmailValid = EMAIL_REGEX.test(email);
 

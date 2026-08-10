@@ -7,11 +7,11 @@ const LETTERS = ["A", "B", "C", "D", "E", "F"];
 export function QuizView({ quizId, isCompleted, onPassed }) {
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [phase, setPhase] = useState("intro");     // intro | answering | done
+  const [phase, setPhase] = useState("intro");     
   const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState([]);    // réponses de la question courante
-  const [feedback, setFeedback] = useState(null);  // {correct, correctIds, hint} après validation
-  const [results, setResults] = useState([]);      // historique {correct} par question
+  const [selected, setSelected] = useState([]);    
+  const [feedback, setFeedback] = useState(null);  
+  const [results, setResults] = useState([]);      
 
   useEffect(() => {
     let alive = true;
@@ -28,11 +28,32 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
   if (loading) return <p className="text-sm text-muted-foreground">Chargement du quiz…</p>;
   if (!quiz) return <p className="text-sm text-muted-foreground">Quiz introuvable.</p>;
 
-  // déjà réussi au chargement
   if (phase === "done-passed") {
     return (
-      <div className="flex items-center gap-2 rounded-sm border border-success/30 bg-success/10 p-4 text-sm font-medium text-success">
-        <CheckCircle2 className="h-5 w-5" /> Quiz déjà réussi
+      <div className="w-full overflow-hidden rounded-sm border border-border">
+        <div
+          className="relative overflow-hidden px-8 py-10"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/vector-1783427992596-c5b4900384d9?q=80&w=1511&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 bg-platform-brand/45" />
+          <div className="relative z-10">
+            <p className="text-sm text-foreground">Évaluation</p>
+            <h1 className="mt-2 text-4xl font-bold text-foreground">Quiz du module</h1>
+            <p className="mt-4 max-w-xl text-sm text-foreground">
+              Vous avez déjà validé ce quiz.
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-card p-8">
+          <div className="flex items-center gap-2 rounded-sm border border-success/30 bg-success/10 p-4 text-sm font-medium text-success">
+            <CheckCircle2 className="h-5 w-5" /> Quiz déjà réussi
+          </div>
+        </div>
       </div>
     );
   }
@@ -41,7 +62,7 @@ export function QuizView({ quizId, isCompleted, onPassed }) {
   const q = questions[current];
 
   const toggleOption = (optionId) => {
-    if (feedback) return; // figé après validation
+    if (feedback) return;
     setSelected((prev) => {
       if (q.type === "single") return [optionId];
       return prev.includes(optionId) ? prev.filter((x) => x !== optionId) : [...prev, optionId];
