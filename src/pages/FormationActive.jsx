@@ -148,14 +148,14 @@ export default function FormationActive() {
                     <img
                         src={isDark ? "/logos/mercure_logo_dark.png" : "/logos/mercure_logo_light.png"}
                         alt="Mercure"
-                        className="h-14 w-auto object-contain"
+                        className="h-10 w-auto object-contain"
                     />
                 </button>
 
                 <span className="h-6 w-px bg-muted-foreground" />
 
                 {branding?.logoUrl && (
-                    <img src={branding.logoUrl} alt={branding.name} className="h-6 w-auto rounded-xs object-contain" />
+                    <img src={branding.logoUrl} alt={branding.name} className="h-10 w-auto rounded-xs object-contain" />
                 )}
 
                 <div className="mx-auto hidden max-w-xs flex-1 items-center gap-3 md:flex">

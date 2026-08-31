@@ -1,226 +1,141 @@
 export const testBank = {
-  test_it: {
-    mod_it_1: [
-      { id: "t_it_1_1", text: "Quel est le principal objectif d'une attaque de phishing ?", type: "single",
+  test_general: {
+    "Évaluation finale": [
+      {
+        id: "t_gen_1", text: "Vous recevez une notification MFA alors que vous ne tentez aucune connexion. Quel est le meilleur réflexe ?", type: "single",
         options: [
-          { id: "a", text: "Ralentir le réseau de l'entreprise", isCorrect: false },
-          { id: "b", text: "Obtenir des informations confidentielles en usurpant un tiers de confiance", isCorrect: true },
-          { id: "c", text: "Installer une mise à jour système", isCorrect: false },
-          { id: "d", text: "Sauvegarder vos fichiers", isCorrect: false },
-        ] },
-      { id: "t_it_1_2", text: "Que faut-il vérifier en priorité dans un e-mail suspect ?", type: "single",
+          { id: "a", text: "Valider pour faire disparaître la notification", isCorrect: false },
+          { id: "b", text: "Refuser la demande et signaler si nécessaire", isCorrect: true },
+          { id: "c", text: "Communiquer le code à un collègue", isCorrect: false },
+          { id: "d", text: "Désactiver temporairement le MFA", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_2", text: "Un partenaire externe vous demande une étude de prix via une messagerie personnelle. Que faites-vous ?", type: "single",
         options: [
-          { id: "a", text: "La couleur du logo", isCorrect: false },
-          { id: "b", text: "L'adresse réelle de l'expéditeur et les liens", isCorrect: true },
-          { id: "c", text: "La taille de la police", isCorrect: false },
-          { id: "d", text: "L'heure d'envoi", isCorrect: false },
-        ] },
-      { id: "t_it_1_3", text: "Que faire avant de cliquer sur un lien dans un e-mail ?", type: "single",
+          { id: "a", text: "Je l'envoie si le partenaire est connu", isCorrect: false },
+          { id: "b", text: "Je vérifie le besoin, le destinataire, la sensibilité et j'utilise uniquement un canal autorisé", isCorrect: true },
+          { id: "c", text: "Je retire uniquement le mot 'confidentiel' du fichier", isCorrect: false },
+          { id: "d", text: "Je l'envoie à partir de mon téléphone personnel", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_3", text: "Un e-mail semblant provenir d'un dirigeant vous demande un paiement urgent et inhabituel. Quelle action est prioritaire ?", type: "single",
         options: [
-          { id: "a", text: "Cliquer immédiatement", isCorrect: false },
-          { id: "b", text: "Survoler le lien pour vérifier l'URL réelle", isCorrect: true },
-          { id: "c", text: "Transférer l'e-mail à tous", isCorrect: false },
-          { id: "d", text: "Imprimer l'e-mail", isCorrect: false },
-        ] },
-      { id: "t_it_1_4", text: "Que faire d'un e-mail contenant une pièce jointe inattendue ?", type: "single",
+          { id: "a", text: "Réaliser le paiement pour respecter l'urgence", isCorrect: false },
+          { id: "b", text: "Vérifier la demande par un canal fiable et indépendant", isCorrect: true },
+          { id: "c", text: "Répondre au mail en demandant confirmation", isCorrect: false },
+          { id: "d", text: "Transférer le mail à un fournisseur", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_4", text: "Plusieurs fichiers deviennent soudainement illisibles et un message de rançon apparaît. Que faites-vous ?", type: "single",
         options: [
-          { id: "a", text: "L'ouvrir par curiosité", isCorrect: false },
-          { id: "b", text: "Ne pas l'ouvrir et vérifier auprès de l'expéditeur", isCorrect: true },
-          { id: "c", text: "La transférer à toute l'équipe", isCorrect: false },
-          { id: "d", text: "La télécharger sur un serveur partagé", isCorrect: false },
-        ] },
-      { id: "t_it_1_5", text: "Comment reconnaître un site web frauduleux ?", type: "single",
+          { id: "a", text: "Je continue à travailler sur d'autres dossiers", isCorrect: false },
+          { id: "b", text: "Je m'arrête, limite la propagation et signale immédiatement", isCorrect: true },
+          { id: "c", text: "Je paie la rançon", isCorrect: false },
+          { id: "d", text: "Je supprime le message", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_5", text: "Vous envoyez par erreur une liste de salariés au mauvais destinataire. Quel comportement est attendu ?", type: "single",
         options: [
-          { id: "a", text: "Il a toujours un beau design", isCorrect: false },
-          { id: "b", text: "URL suspecte, absence de HTTPS, fautes d'orthographe", isCorrect: true },
-          { id: "c", text: "Il se charge rapidement", isCorrect: false },
-          { id: "d", text: "Il propose des cookies", isCorrect: false },
-        ] },
-    ],
-    mod_it_2: [
-      { id: "t_it_2_1", text: "Quelle longueur minimale est recommandée pour un mot de passe robuste ?", type: "single",
+          { id: "a", text: "Supprimer le mail envoyé et ne rien dire", isCorrect: false },
+          { id: "b", text: "Signaler immédiatement l'erreur afin de limiter l'impact", isCorrect: true },
+          { id: "c", text: "Demander au destinataire de garder le document", isCorrect: false },
+          { id: "d", text: "Attendre une éventuelle réclamation", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_6", text: "Vous trouvez un bordereau de prix sensible oublié sur l'imprimante. Que faites-vous ?", type: "single",
         options: [
-          { id: "a", text: "4 caractères", isCorrect: false },
-          { id: "b", text: "6 caractères", isCorrect: false },
-          { id: "c", text: "12 caractères ou plus", isCorrect: true },
-          { id: "d", text: "8 caractères", isCorrect: false },
-        ] },
-      { id: "t_it_2_2", text: "Qu'est-ce que l'authentification multifacteur (MFA) ?", type: "single",
+          { id: "a", text: "Je le laisse sur place", isCorrect: false },
+          { id: "b", text: "Je le sécurise et l'oriente vers la personne ou le processus approprié", isCorrect: true },
+          { id: "c", text: "Je le photographie pour savoir à qui il appartient", isCorrect: false },
+          { id: "d", text: "Je le jette dans une poubelle classique", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_7", text: "Deux versions d'un même fichier de chiffrage existent. Laquelle faut-il utiliser ?", type: "single",
         options: [
-          { id: "a", text: "Utiliser plusieurs mots de passe successifs", isCorrect: false },
-          { id: "b", text: "Combiner plusieurs preuves d'identité distinctes", isCorrect: true },
-          { id: "c", text: "Changer de mot de passe chaque semaine", isCorrect: false },
-          { id: "d", text: "Se connecter depuis plusieurs appareils", isCorrect: false },
-        ] },
-      { id: "t_it_2_3", text: "Pourquoi ne faut-il pas réutiliser le même mot de passe partout ?", type: "single",
+          { id: "a", text: "Celle qui contient le plus de données", isCorrect: false },
+          { id: "b", text: "La version validée et à jour", isCorrect: true },
+          { id: "c", text: "La première reçue", isCorrect: false },
+          { id: "d", text: "Celle qui se trouve sur un poste personnel", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_8", text: "Un nouvel arrivant veut installer un logiciel non référencé pour traiter plus vite un fichier. Quelle réponse est correcte ?", type: "single",
         options: [
-          { id: "a", text: "Cela ralentit la connexion", isCorrect: false },
-          { id: "b", text: "Une seule fuite compromet tous vos comptes", isCorrect: true },
-          { id: "c", text: "Les sites l'interdisent", isCorrect: false },
-          { id: "d", text: "Cela consomme plus de mémoire", isCorrect: false },
-        ] },
-      { id: "t_it_2_4", text: "Qu'est-ce qu'une phrase de passe (passphrase) ?", type: "single",
+          { id: "a", text: "Il peut l'installer s'il est gratuit", isCorrect: false },
+          { id: "b", text: "Il doit utiliser uniquement les outils autorisés", isCorrect: true },
+          { id: "c", text: "Il peut le tester sur son poste puis le supprimer", isCorrect: false },
+          { id: "d", text: "Il peut l'installer avec le compte d'un collègue", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_9", text: "Quelle affirmation décrit le mieux le rôle des sauvegardes face à un ransomware ?", type: "single",
         options: [
-          { id: "a", text: "Une suite de mots longue et mémorisable", isCorrect: true },
-          { id: "b", text: "Un code PIN à 4 chiffres", isCorrect: false },
-          { id: "c", text: "Le nom de votre entreprise", isCorrect: false },
-          { id: "d", text: "Un identifiant de session", isCorrect: false },
-        ] },
-      { id: "t_it_2_5", text: "Quelles pratiques renforcent la sécurité des comptes ? (plusieurs réponses)", type: "multiple",
+          { id: "a", text: "Elles empêchent toute infection", isCorrect: false },
+          { id: "b", text: "Elles contribuent à la reprise si elles sont correctement réalisées et protégées", isCorrect: true },
+          { id: "c", text: "Elles remplacent le signalement", isCorrect: false },
+          { id: "d", text: "Elles rendent le MFA inutile", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_10", text: "Un interlocuteur au téléphone se présente comme le support et réclame votre code MFA pour débloquer votre compte. Que faites-vous ?", type: "single",
         options: [
-          { id: "a", text: "Activer la MFA", isCorrect: true },
-          { id: "b", text: "Utiliser un gestionnaire de mots de passe", isCorrect: true },
-          { id: "c", text: "Partager ses identifiants avec l'équipe", isCorrect: false },
-          { id: "d", text: "Utiliser le même mot de passe partout", isCorrect: false },
-        ] },
-    ],
-    mod_it_3: [
-      { id: "t_it_3_1", text: "Qu'est-ce qu'un ransomware ?", type: "single",
+          { id: "a", text: "Je donne le code si l'appel semble crédible", isCorrect: false },
+          { id: "b", text: "Je refuse de communiquer le code et je vérifie l'identité via le canal officiel", isCorrect: true },
+          { id: "c", text: "Je donne uniquement les deux premiers chiffres", isCorrect: false },
+          { id: "d", text: "Je demande à un collègue de fournir son code", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_11", text: "Un document contient des hypothèses de marge et des prix unitaires. Quelle approche est la plus adaptée ?", type: "single",
         options: [
-          { id: "a", text: "Un logiciel qui chiffre vos données et exige une rançon", isCorrect: true },
-          { id: "b", text: "Un antivirus gratuit", isCorrect: false },
-          { id: "c", text: "Un outil de sauvegarde", isCorrect: false },
-          { id: "d", text: "Un gestionnaire de mots de passe", isCorrect: false },
-        ] },
-      { id: "t_it_3_2", text: "Quelle est la meilleure protection contre les ransomwares ?", type: "single",
+          { id: "a", text: "Le publier sur l'espace le plus accessible", isCorrect: false },
+          { id: "b", text: "Le considérer comme une information sensible et limiter sa diffusion", isCorrect: true },
+          { id: "c", text: "Le transmettre à tous les collaborateurs", isCorrect: false },
+          { id: "d", text: "Le stocker sur un service cloud personnel", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_12", text: "Un candidat demande quelles données personnelles SGTM détient sur lui. Que faites-vous ?", type: "single",
         options: [
-          { id: "a", text: "Payer rapidement la rançon", isCorrect: false },
-          { id: "b", text: "Des sauvegardes régulières et hors ligne", isCorrect: true },
-          { id: "c", text: "Désactiver l'antivirus", isCorrect: false },
-          { id: "d", text: "Partager ses fichiers en ligne", isCorrect: false },
-        ] },
-      { id: "t_it_3_3", text: "Que faire si vous suspectez que votre poste est infecté ?", type: "single",
+          { id: "a", text: "Je lui envoie tous les dossiers trouvés", isCorrect: false },
+          { id: "b", text: "J'oriente la demande vers le DPO ou le canal prévu", isCorrect: true },
+          { id: "c", text: "Je lui réponds qu'aucune demande n'est possible", isCorrect: false },
+          { id: "d", text: "Je demande à un collègue de répondre sans vérification", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_13", text: "Pourquoi l'utilisation du même mot de passe sur plusieurs services est-elle dangereuse ?", type: "single",
         options: [
-          { id: "a", text: "Continuer à travailler normalement", isCorrect: false },
-          { id: "b", text: "Déconnecter le poste du réseau et alerter la sécurité", isCorrect: true },
-          { id: "c", text: "Éteindre et ne rien dire", isCorrect: false },
-          { id: "d", text: "Formater immédiatement soi-même", isCorrect: false },
-        ] },
-      { id: "t_it_3_4", text: "Qu'est-ce qu'une mise à jour de sécurité ?", type: "single",
+          { id: "a", text: "Elle ralentit les connexions", isCorrect: false },
+          { id: "b", text: "La compromission d'un service peut exposer les autres comptes", isCorrect: true },
+          { id: "c", text: "Elle empêche les mises à jour", isCorrect: false },
+          { id: "d", text: "Elle rend les mots de passe plus longs", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_14", text: "Vous constatez un événement inhabituel mais vous n'êtes pas certain qu'il s'agisse d'un incident. Quel principe s'applique ?", type: "single",
         options: [
-          { id: "a", text: "Un correctif qui comble des failles connues", isCorrect: true },
-          { id: "b", text: "Une publicité", isCorrect: false },
-          { id: "c", text: "Un ralentissement volontaire", isCorrect: false },
-          { id: "d", text: "Une sauvegarde automatique", isCorrect: false },
-        ] },
-      { id: "t_it_3_5", text: "Quel comportement adopter avec une clé USB trouvée ?", type: "single",
+          { id: "a", text: "Ne signaler que lorsqu'on a une preuve absolue", isCorrect: false },
+          { id: "b", text: "Signaler ou demander rapidement en cas de doute", isCorrect: true },
+          { id: "c", text: "Attendre que plusieurs collègues rencontrent le même problème", isCorrect: false },
+          { id: "d", text: "Supprimer les éléments suspects avant d'en parler", isCorrect: false },
+        ]
+      },
+      {
+        id: "t_gen_15", text: "Avant tout partage d'une information sensible, quel enchaînement résume le mieux les bons réflexes ?", type: "single",
         options: [
-          { id: "a", text: "La brancher pour voir son contenu", isCorrect: false },
-          { id: "b", text: "Ne pas la brancher et la remettre à la sécurité", isCorrect: true },
-          { id: "c", text: "La formater et la garder", isCorrect: false },
-          { id: "d", text: "La brancher sur un poste isolé", isCorrect: false },
-        ] },
-    ],
-    mod_it_4: [
-      { id: "t_it_4_1", text: "Quel risque présente un réseau Wi-Fi public non sécurisé ?", type: "single",
-        options: [
-          { id: "a", text: "Aucun risque particulier", isCorrect: false },
-          { id: "b", text: "L'interception de vos données par un tiers", isCorrect: true },
-          { id: "c", text: "Une connexion plus rapide", isCorrect: false },
-          { id: "d", text: "Une meilleure autonomie de batterie", isCorrect: false },
-        ] },
-      { id: "t_it_4_2", text: "À quoi sert un VPN ?", type: "single",
-        options: [
-          { id: "a", text: "À chiffrer votre connexion et protéger vos données en transit", isCorrect: true },
-          { id: "b", text: "À accélérer votre ordinateur", isCorrect: false },
-          { id: "c", text: "À nettoyer les virus", isCorrect: false },
-          { id: "d", text: "À augmenter le stockage", isCorrect: false },
-        ] },
-      { id: "t_it_4_3", text: "Quel est le rôle d'un antivirus ?", type: "single",
-        options: [
-          { id: "a", text: "Détecter et neutraliser les logiciels malveillants", isCorrect: true },
-          { id: "b", text: "Accélérer Internet", isCorrect: false },
-          { id: "c", text: "Créer des mots de passe", isCorrect: false },
-          { id: "d", text: "Sauvegarder les e-mails", isCorrect: false },
-        ] },
-      { id: "t_it_4_4", text: "Qu'est-ce que le principe du moindre privilège ?", type: "single",
-        options: [
-          { id: "a", text: "Donner à chacun uniquement les accès nécessaires à son travail", isCorrect: true },
-          { id: "b", text: "Donner tous les accès à tout le monde", isCorrect: false },
-          { id: "c", text: "Supprimer tous les comptes", isCorrect: false },
-          { id: "d", text: "Partager les comptes admin", isCorrect: false },
-        ] },
-      { id: "t_it_4_5", text: "Pourquoi verrouiller sa session en quittant son poste ?", type: "single",
-        options: [
-          { id: "a", text: "Pour économiser de la batterie", isCorrect: false },
-          { id: "b", text: "Pour empêcher tout accès non autorisé", isCorrect: true },
-          { id: "c", text: "Pour accélérer l'ordinateur", isCorrect: false },
-          { id: "d", text: "Ce n'est pas nécessaire", isCorrect: false },
-        ] },
-    ],
-    mod_it_5: [
-      { id: "t_it_5_1", text: "Comment protéger les données sur un appareil mobile pro ? (plusieurs réponses)", type: "multiple",
-        options: [
-          { id: "a", text: "Activer le verrouillage par code ou biométrie", isCorrect: true },
-          { id: "b", text: "Chiffrer l'appareil", isCorrect: true },
-          { id: "c", text: "Désactiver toutes les mises à jour", isCorrect: false },
-          { id: "d", text: "Laisser l'appareil déverrouillé pour aller plus vite", isCorrect: false },
-        ] },
-      { id: "t_it_5_2", text: "Qu'est-ce que le « shoulder surfing » ?", type: "single",
-        options: [
-          { id: "a", text: "Un sport nautique", isCorrect: false },
-          { id: "b", text: "Observer par-dessus l'épaule pour voler des informations", isCorrect: true },
-          { id: "c", text: "Une technique de sauvegarde", isCorrect: false },
-          { id: "d", text: "Un type de virus", isCorrect: false },
-        ] },
-      { id: "t_it_5_3", text: "Pourquoi ne pas noter son mot de passe sur un post-it au bureau ?", type: "single",
-        options: [
-          { id: "a", text: "Cela abîme l'écran", isCorrect: false },
-          { id: "b", text: "N'importe qui de passage peut le lire", isCorrect: true },
-          { id: "c", text: "Le papier coûte cher", isCorrect: false },
-          { id: "d", text: "Ce n'est pas interdit", isCorrect: false },
-        ] },
-      { id: "t_it_5_4", text: "Qu'est-ce qu'une donnée sensible ?", type: "single",
-        options: [
-          { id: "a", text: "Une donnée publique sans importance", isCorrect: false },
-          { id: "b", text: "Une information dont la divulgation peut nuire (personnelles, financières...)", isCorrect: true },
-          { id: "c", text: "Un fichier temporaire", isCorrect: false },
-          { id: "d", text: "Une image d'illustration", isCorrect: false },
-        ] },
-      { id: "t_it_5_5", text: "Quelle est la bonne réaction face à un doute sur la sécurité ?", type: "single",
-        options: [
-          { id: "a", text: "Ne rien faire pour ne pas déranger", isCorrect: false },
-          { id: "b", text: "Signaler rapidement à l'équipe sécurité", isCorrect: true },
-          { id: "c", text: "En parler uniquement à un collègue", isCorrect: false },
-          { id: "d", text: "Attendre que le problème disparaisse", isCorrect: false },
-        ] },
-    ],
-    mod_it_6: [
-      { id: "t_it_6_1", text: "Qu'est-ce que l'ingénierie sociale ?", type: "single",
-        options: [
-          { id: "a", text: "Une technique de programmation", isCorrect: false },
-          { id: "b", text: "La manipulation psychologique pour obtenir des informations ou des accès", isCorrect: true },
-          { id: "c", text: "Un type de réseau social professionnel", isCorrect: false },
-          { id: "d", text: "Une méthode de sauvegarde", isCorrect: false },
-        ] },
-      { id: "t_it_6_2", text: "Un inconnu se disant du « support » demande votre mot de passe. Que faites-vous ?", type: "single",
-        options: [
-          { id: "a", text: "Je le communique, c'est le support", isCorrect: false },
-          { id: "b", text: "Je refuse et je signale l'appel", isCorrect: true },
-          { id: "c", text: "Je le note et le rappelle plus tard", isCorrect: false },
-          { id: "d", text: "Je donne seulement la moitié du mot de passe", isCorrect: false },
-        ] },
-      { id: "t_it_6_3", text: "Un e-mail urgent de votre « directeur » demande un virement immédiat. Que faites-vous ?", type: "single",
-        options: [
-          { id: "a", text: "J'effectue le virement sans délai", isCorrect: false },
-          { id: "b", text: "Je vérifie par un autre canal avant toute action", isCorrect: true },
-          { id: "c", text: "Je transfère l'e-mail à mes collègues", isCorrect: false },
-          { id: "d", text: "Je réponds en demandant le RIB", isCorrect: false },
-        ] },
-      { id: "t_it_6_4", text: "Que signifie « BEC » (Business Email Compromise) ?", type: "single",
-        options: [
-          { id: "a", text: "Une sauvegarde d'e-mails", isCorrect: false },
-          { id: "b", text: "Une fraude par usurpation d'e-mail professionnel", isCorrect: true },
-          { id: "c", text: "Un protocole de messagerie", isCorrect: false },
-          { id: "d", text: "Un antivirus de messagerie", isCorrect: false },
-        ] },
-      { id: "t_it_6_5", text: "Que faire face à une demande inhabituelle de changement de RIB d'un fournisseur ?", type: "single",
-        options: [
-          { id: "a", text: "Appliquer le changement immédiatement", isCorrect: false },
-          { id: "b", text: "Vérifier via un canal officiel connu avant tout changement", isCorrect: true },
-          { id: "c", text: "Ignorer sans vérifier", isCorrect: false },
-          { id: "d", text: "Transférer la demande au premier collègue", isCorrect: false },
-        ] },
+          { id: "a", text: "Envoyer vite, vérifier ensuite", isCorrect: false },
+          { id: "b", text: "Classer, vérifier le besoin et le destinataire, contrôler la version, utiliser le bon canal et signaler en cas de doute", isCorrect: true },
+          { id: "c", text: "Copier le document sur plusieurs supports avant l'envoi", isCorrect: false },
+          { id: "d", text: "Demander à un collègue de transmettre à sa place", isCorrect: false },
+        ]
+      },
     ],
   },
 };
