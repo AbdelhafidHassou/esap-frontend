@@ -1,7 +1,7 @@
-import { useAdminAuth } from "./AdminAuthContext";
+import { useAdminAuth } from "../context/AdminAuthContext";
 import { Outlet, Navigate } from "react-router-dom";
  
-export function AdminProtectRoute() {
+export function AdminProtectedRoute() {
     const { isAuthenticated } = useAdminAuth();
     return isAuthenticated ? <Outlet /> : <Navigate to="/admin/login" replace />
 }
