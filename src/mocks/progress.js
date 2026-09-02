@@ -1,27 +1,26 @@
 export const readChapters = [
-  "ch_it_1_1",
-  "ch_it_1_2",
-  "ch_it_1_3",
-  "ch_it_1_4",
-  "ch_it_1_5",
-  "ch_it_2_1",
-  "ch_it_2_2",
+  "ch_gen_1_1", "ch_gen_1_2", "ch_gen_1_3", "ch_gen_1_4", "ch_gen_1_5",
+  "ch_gen_1_6", "ch_gen_1_7", "ch_gen_1_8", "ch_gen_1_9", "ch_gen_1_10",
+  "ch_gen_1_11", "ch_gen_1_12", "ch_gen_1_13", "ch_gen_1_14", "ch_gen_1_15",
+  "ch_gen_1_16", "ch_gen_1_17",
   "ch_hr_1_1",
 ];
 
 export const quizProgress = {
-  quiz_it_1: { passed: true, score: 100 },
+  quiz_gen_1: { passed: false, score: 0 },
 };
 
 export const testProgress = {
-  dep_it: { attemptsToday: 0, lastScore: null, passed: false },
+  dep_general: {
+    attemptsToday: 0,
+    lastScore: null,
+    passed: false,
+  },
 };
 
 export const formationStatus = {
-  dep_it: "in_progress",
+  dep_general: "awaiting_final_test",
   dep_hr: "in_progress",
-  dep_fin: "not_started",
-  dep_sales: "not_started",
 };
 
 export const riskScore = {
@@ -30,10 +29,10 @@ export const riskScore = {
 };
 
 export const dashboardStats = {
-  departmentsAssigned: 4,
-  totalModules: 24,
+  departmentsAssigned: 2,
+  totalModules: 7,
   modulesValidated: 1,
-  modulesInProgress: 2,
+  modulesInProgress: 1,
 };
 
 export const progressOverTime = [
@@ -46,15 +45,11 @@ export const progressOverTime = [
 ];
 
 export const ssiOpened = {
-  dep_it: [],
+  dep_general: [],
   dep_hr: [],
-  dep_fin: [],
-  dep_sales: [],
 };
 
 export const ssiAccepted = {
-  dep_it: false,
+  dep_general: false,
   dep_hr: false,
-  dep_fin: false,
-  dep_sales: false,
 };

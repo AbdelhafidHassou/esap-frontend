@@ -34,13 +34,19 @@ function ChapterBody({ contentType, body }) {
     case "video":
       return (
         <div className="w-full overflow-hidden rounded-sm bg-black" style={{ aspectRatio: "16/7" }}>
-          <iframe
-            className="h-full w-full"
-            src={`https://www.youtube.com/embed/${body.videoId}`}
-            title="Vidéo du chapitre"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          {body.provider === "local" ? (
+            <video className="h-full w-full" src={body.src} controls>
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+          ) : (
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${body.videoId}`}
+              title="Vidéo du chapitre"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          )}
         </div>
       );
 
@@ -102,7 +108,7 @@ export function ChapterView({ chapterId, isCompleted, onMarkRead, onStateChange 
     getChapterContent(chapterId).then((data) => {
       if (!alive) return;
       setContent(data);
-      setRemaining(isCompleted ? 0 : (data?.readingTimerSeconds ?? 180));
+      setRemaining(isCompleted ? 0 : 0); //(data?.readingTimerSeconds ?? 180)
       setLoading(false);
     });
     return () => { alive = false; };

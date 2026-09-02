@@ -87,7 +87,7 @@ export default function Login() {
             <img
               src={branding.logoUrl}
               alt={branding.name}
-              className="mb-10 h-10 w-auto rounded-sm"
+              className="mb-10 h-22 w-auto rounded-sm"
             />
           )}
 

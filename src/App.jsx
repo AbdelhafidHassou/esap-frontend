@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { applyBranding } from "./lib/branding";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { AdminAuthProvider } from "./admin/context/AdminAuthContext";
 
 function BrandignApplier() {
   const { branding } = useAppData()
@@ -15,12 +16,14 @@ function BrandignApplier() {
 export default function App() {
   return (
     <AuthProvider>
-      <AppDataProvider>
-        <BrandignApplier />
-        <ThemeProvider>
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </AppDataProvider>
+      <AdminAuthProvider>
+        <AppDataProvider>
+          <BrandignApplier />
+          <ThemeProvider>
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </AppDataProvider>
+      </AdminAuthProvider>
     </AuthProvider>
   )
 }
