@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { Search, X } from "lucide-react"
 import { getDepartments } from "@/data/api"
+import { modules as moduleDict } from "@/mocks/departments"
 
 export default function SearchBar() {
     const navigate = useNavigate()
@@ -14,7 +15,9 @@ export default function SearchBar() {
         getDepartments().then((departments) => {
             const flat = []
             departments.forEach((dep) => {
-                dep.modules.forEach((mod) => {
+                (dep.moduleIds ?? []).forEach((mid) => {
+                    const mod = moduleDict[mid]
+                    if (!mod) return
                     mod.chapters.forEach((ch) => {
                         flat.push({ type: "Chapitre", title: ch.title, moduleId: mod.id, departmentId: dep.id, dep: dep.name })
                     })

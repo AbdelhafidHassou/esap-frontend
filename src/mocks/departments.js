@@ -1,488 +1,459 @@
-import { phishingImages } from "./phishingAssets";
-import phishingVideo from "@/assets/general/phishing/18-sgtm.mp4";
+const img = (slug, n) => `/content/${slug}/${n}.jpg`;
+
+export const modules = {
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 1 : Accueil cyber (onboarding)
+  // ----------------------------------------------------------
+  mod_accueil: {
+    id: "mod_accueil",
+    slug: "accueil",
+    title: "Accueil cyber",
+    description:
+      "Les réflexes de cybersécurité dès le premier jour chez SGTM : protéger ses accès, l'information, et savoir réagir face à une demande suspecte.",
+    imageUrl: img("accueil", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_accueil_1", title: "Bienvenue dans l'environnement numérique SGTM", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("accueil", 1), alt: "Bienvenue dans l'environnement numérique SGTM" } },
+      { id: "ch_accueil_2", title: "La cybersécurité commence dès mon arrivée", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("accueil", 2), alt: "La cybersécurité commence dès mon arrivée" } },
+      { id: "ch_accueil_3", title: "Ce que je dois protéger chez SGTM", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("accueil", 3), alt: "Ce que je dois protéger chez SGTM" } },
+      { id: "ch_accueil_4", title: "Mes accès sont personnels", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("accueil", 4), alt: "Mes accès sont personnels" } },
+      { id: "ch_accueil_5", title: "Je sécurise mon poste de travail", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("accueil", 5), alt: "Je sécurise mon poste de travail" } },
+      { id: "ch_accueil_6", title: "J'utilise uniquement les outils autorisés", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("accueil", 6), alt: "J'utilise uniquement les outils autorisés" } },
+      { id: "ch_accueil_7", title: "Je protège l'information avant de la partager", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("accueil", 7), alt: "Je protège l'information avant de la partager" } },
+      { id: "ch_accueil_8", title: "Je reconnais un message ou une demande suspecte", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("accueil", 8), alt: "Je reconnais un message ou une demande suspecte" } },
+      { id: "ch_accueil_9", title: "Je protège mes mots de passe et mon MFA", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("accueil", 9), alt: "Je protège mes mots de passe et mon MFA" } },
+      { id: "ch_accueil_10", title: "Je sécurise mes documents et espaces de travail", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("accueil", 10), alt: "Je sécurise mes documents et espaces de travail" } },
+      { id: "ch_accueil_11", title: "Je reste vigilant en mobilité et sur chantier", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("accueil", 11), alt: "Je reste vigilant en mobilité et sur chantier" } },
+      { id: "ch_accueil_12", title: "J'utilise les supports amovibles avec prudence", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("accueil", 12), alt: "J'utilise les supports amovibles avec prudence" } },
+      { id: "ch_accueil_13", title: "J'installe uniquement ce qui est autorisé", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("accueil", 13), alt: "J'installe uniquement ce qui est autorisé" } },
+      { id: "ch_accueil_14", title: "Face à un comportement inhabituel, je m'arrête", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("accueil", 14), alt: "Face à un comportement inhabituel, je m'arrête" } },
+      { id: "ch_accueil_15", title: "Je signale rapidement un incident ou un doute", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("accueil", 15), alt: "Je signale rapidement un incident ou un doute" } },
+      { id: "ch_accueil_16", title: "Cas pratique - Mes premiers jours", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("accueil", 16), alt: "Cas pratique, mes premiers jours" } },
+      { id: "ch_accueil_17", title: "Cas pratique - Une demande inhabituelle arrive", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("accueil", 17), alt: "Cas pratique, une demande inhabituelle arrive" } },
+      { id: "ch_accueil_18", title: "Mes réflexes cyber dès le premier jour", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("accueil", 18), alt: "Mes réflexes cyber dès le premier jour" } },
+    ],
+    quiz: { id: "quiz_accueil", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 2 : Culture SSI
+  // ----------------------------------------------------------
+  mod_culture: {
+    id: "mod_culture",
+    slug: "culture",
+    title: "Culture SSI",
+    description:
+      "Comprendre la sécurité de l'information chez SGTM : disponibilité, intégrité, confidentialité, la logique du risque et les réflexes qui protègent au quotidien.",
+    imageUrl: img("culture", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_culture_1", title: "Culture générale SSI & ISO 27001", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("culture", 1), alt: "Culture générale SSI et ISO 27001" } },
+      { id: "ch_culture_2", title: "L'information fait fonctionner SGTM", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("culture", 2), alt: "L'information fait fonctionner SGTM" } },
+      { id: "ch_culture_3", title: "Disponibilité - l'info au bon moment", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("culture", 3), alt: "Disponibilité, l'info au bon moment" } },
+      { id: "ch_culture_4", title: "Intégrité - une info fiable", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("culture", 4), alt: "Intégrité, une info fiable" } },
+      { id: "ch_culture_5", title: "Confidentialité - les bonnes personnes", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("culture", 5), alt: "Confidentialité, les bonnes personnes" } },
+      { id: "ch_culture_6", title: "Le SMSI, l'organisation qui pilote la sécurité", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("culture", 6), alt: "Le SMSI, l'organisation qui pilote la sécurité" } },
+      { id: "ch_culture_7", title: "ISO/IEC 27001, la référence internationale", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("culture", 7), alt: "ISO IEC 27001, la référence internationale" } },
+      { id: "ch_culture_8", title: "Le rôle de chacun", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("culture", 8), alt: "Le rôle de chacun" } },
+      { id: "ch_culture_9", title: "La logique du risque", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("culture", 9), alt: "La logique du risque" } },
+      { id: "ch_culture_10", title: "Signaler vite, limiter l'impact", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("culture", 10), alt: "Signaler vite, limiter l'impact" } },
+      { id: "ch_culture_11", title: "Le cycle PDCA", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("culture", 11), alt: "Le cycle PDCA" } },
+      { id: "ch_culture_12", title: "Réflexe 1 - Je protège", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("culture", 12), alt: "Réflexe 1, je protège" } },
+      { id: "ch_culture_13", title: "Réflexe 2 - Je vérifie", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("culture", 13), alt: "Réflexe 2, je vérifie" } },
+      { id: "ch_culture_14", title: "Réflexe 3 - Je sécurise mes accès", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("culture", 14), alt: "Réflexe 3, je sécurise mes accès" } },
+      { id: "ch_culture_15", title: "Réflexe 4 - J'utilise les moyens autorisés", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("culture", 15), alt: "Réflexe 4, j'utilise les moyens autorisés" } },
+      { id: "ch_culture_16", title: "Réflexe 5 - Je reste vigilant", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("culture", 16), alt: "Réflexe 5, je reste vigilant" } },
+      { id: "ch_culture_17", title: "Réflexe 6 - Je signale", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("culture", 17), alt: "Réflexe 6, je signale" } },
+      { id: "ch_culture_18", title: "Réflexe 7 - Je contribue", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("culture", 18), alt: "Réflexe 7, je contribue" } },
+    ],
+    quiz: { id: "quiz_culture", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 3 : Phishing et ingénierie sociale
+  // ----------------------------------------------------------
+  mod_phishing: {
+    id: "mod_phishing",
+    slug: "phishing",
+    title: "Phishing et ingénierie sociale",
+    description:
+      "Reconnaître les tentatives de phishing et d'ingénierie sociale, adopter les bons réflexes de vérification et savoir réagir en cas de doute.",
+    imageUrl: img("phishing", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_phishing_1", title: "Pourquoi SGTM est concernée", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("phishing", 1), alt: "Pourquoi SGTM est concernée" } },
+      { id: "ch_phishing_2", title: "Qu'est-ce que le phishing", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("phishing", 2), alt: "Qu'est-ce que le phishing" } },
+      { id: "ch_phishing_3", title: "Qu'est-ce que l'ingénierie sociale", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("phishing", 3), alt: "Qu'est-ce que l'ingénierie sociale" } },
+      { id: "ch_phishing_4", title: "L'email de phishing", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("phishing", 4), alt: "L'email de phishing" } },
+      { id: "ch_phishing_5", title: "Spear-phishing et usurpation", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("phishing", 5), alt: "Spear-phishing et usurpation" } },
+      { id: "ch_phishing_6", title: "Smishing et messageries", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("phishing", 6), alt: "Smishing et messageries" } },
+      { id: "ch_phishing_7", title: "Vishing et faux support", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("phishing", 7), alt: "Vishing et faux support" } },
+      { id: "ch_phishing_8", title: "Vérifier l'expéditeur", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("phishing", 8), alt: "Vérifier l'expéditeur" } },
+      { id: "ch_phishing_9", title: "Contrôler le lien et la pièce jointe", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("phishing", 9), alt: "Contrôler le lien et la pièce jointe" } },
+      { id: "ch_phishing_10", title: "Reconnaître l'urgence et la manipulation", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("phishing", 10), alt: "Reconnaître l'urgence et la manipulation" } },
+      { id: "ch_phishing_11", title: "Le réflexe des 10 secondes", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("phishing", 11), alt: "Le réflexe des 10 secondes" } },
+      { id: "ch_phishing_12", title: "Vérifier par un autre canal", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("phishing", 12), alt: "Vérifier par un autre canal" } },
+      { id: "ch_phishing_13", title: "Ce que je ne partage jamais", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("phishing", 13), alt: "Ce que je ne partage jamais" } },
+      { id: "ch_phishing_14", title: "Cas pratique - Faux changement de RIB", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("phishing", 14), alt: "Cas pratique, faux changement de RIB" } },
+      { id: "ch_phishing_15", title: "Cas pratique - Faux lien vers un dossier chantier", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("phishing", 15), alt: "Cas pratique, faux lien vers un dossier chantier" } },
+      { id: "ch_phishing_16", title: "J'ai cliqué ou répondu - que faire", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("phishing", 16), alt: "J'ai cliqué ou répondu, que faire" } },
+      { id: "ch_phishing_17", title: "Le bon réflexe à retenir", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("phishing", 17), alt: "Le bon réflexe à retenir" } },
+    ],
+    quiz: { id: "quiz_phishing", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 4 : Mot de passe et MFA
+  // ----------------------------------------------------------
+  mod_mdp_mfa: {
+    id: "mod_mdp_mfa",
+    slug: "mdp_mfa",
+    title: "Mot de passe et MFA",
+    description:
+      "Créer et gérer des mots de passe robustes, comprendre et bien utiliser le MFA, et réagir face à une compromission d'identifiants.",
+    imageUrl: img("mdp_mfa", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_mdp_mfa_1", title: "Gérer ses accès en sécurité", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 1), alt: "Gérer ses accès en sécurité" } },
+      { id: "ch_mdp_mfa_2", title: "Pourquoi protéger ses accès", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 2), alt: "Pourquoi protéger ses accès" } },
+      { id: "ch_mdp_mfa_3", title: "À quoi sert un mot de passe", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 3), alt: "À quoi sert un mot de passe" } },
+      { id: "ch_mdp_mfa_4", title: "Créer un mot de passe robuste", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 4), alt: "Créer un mot de passe robuste" } },
+      { id: "ch_mdp_mfa_5", title: "La phrase de passe", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 5), alt: "La phrase de passe" } },
+      { id: "ch_mdp_mfa_6", title: "Les erreurs courantes", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 6), alt: "Les erreurs courantes" } },
+      { id: "ch_mdp_mfa_7", title: "Un mot de passe unique par compte", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 7), alt: "Un mot de passe unique par compte" } },
+      { id: "ch_mdp_mfa_8", title: "Le gestionnaire de mots de passe", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 8), alt: "Le gestionnaire de mots de passe" } },
+      { id: "ch_mdp_mfa_9", title: "Comprendre le MFA", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 9), alt: "Comprendre le MFA" } },
+      { id: "ch_mdp_mfa_10", title: "Protéger ses accès chez SGTM", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 10), alt: "Protéger ses accès chez SGTM" } },
+      { id: "ch_mdp_mfa_11", title: "Bien utiliser le MFA", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 11), alt: "Bien utiliser le MFA" } },
+      { id: "ch_mdp_mfa_12", title: "Ce que je ne partage jamais", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 12), alt: "Ce que je ne partage jamais" } },
+      { id: "ch_mdp_mfa_13", title: "Phishing et vol d'identifiants", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 13), alt: "Phishing et vol d'identifiants" } },
+      { id: "ch_mdp_mfa_14", title: "Je reçois une demande suspecte", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 14), alt: "Je reçois une demande suspecte" } },
+      { id: "ch_mdp_mfa_15", title: "J'ai oublié ou compromis mon mot de passe", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 15), alt: "J'ai oublié ou compromis mon mot de passe" } },
+      { id: "ch_mdp_mfa_16", title: "Je perds mon téléphone MFA", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 16), alt: "Je perds mon téléphone MFA" } },
+      { id: "ch_mdp_mfa_17", title: "Accès chantier", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 17), alt: "Accès chantier" } },
+      { id: "ch_mdp_mfa_18", title: "Les bons réflexes à retenir", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("mdp_mfa", 18), alt: "Les bons réflexes à retenir" } },
+    ],
+    quiz: { id: "quiz_mdp_mfa", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 5 : Protéger l'information
+  // ----------------------------------------------------------
+  mod_proteger: {
+    id: "mod_proteger",
+    slug: "proteger",
+    title: "Protéger l'information - Les réflexes",
+    description:
+      "Les bons réflexes pour protéger l'information au quotidien : classer, vérifier avant de partager, choisir le bon canal, sécuriser poste, papier et supports.",
+    imageUrl: img("proteger", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_proteger_1", title: "Protéger l'information - Les bons réflexes", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("proteger", 1), alt: "Protéger l'information, les bons réflexes" } },
+      { id: "ch_proteger_2", title: "Pourquoi protéger l'information", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("proteger", 2), alt: "Pourquoi protéger l'information" } },
+      { id: "ch_proteger_3", title: "Quelles informations protéger", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("proteger", 3), alt: "Quelles informations protéger" } },
+      { id: "ch_proteger_4", title: "Je protège les documents et supports", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("proteger", 4), alt: "Je protège les documents et supports" } },
+      { id: "ch_proteger_5", title: "Je vérifie avant de partager", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("proteger", 5), alt: "Je vérifie avant de partager" } },
+      { id: "ch_proteger_6", title: "Je choisis le bon canal", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("proteger", 6), alt: "Je choisis le bon canal" } },
+      { id: "ch_proteger_7", title: "Je sécurise mon poste et ma session", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("proteger", 7), alt: "Je sécurise mon poste et ma session" } },
+      { id: "ch_proteger_8", title: "Je range et protège le papier", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("proteger", 8), alt: "Je range et protège le papier" } },
+      { id: "ch_proteger_9", title: "Je sauvegarde au bon endroit", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("proteger", 9), alt: "Je sauvegarde au bon endroit" } },
+      { id: "ch_proteger_10", title: "Je reste discret hors du cadre de travail", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("proteger", 10), alt: "Je reste discret hors du cadre de travail" } },
+      { id: "ch_proteger_11", title: "J'imprime avec prudence", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("proteger", 11), alt: "J'imprime avec prudence" } },
+      { id: "ch_proteger_12", title: "J'utilise seulement les supports autorisés", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("proteger", 12), alt: "J'utilise seulement les supports autorisés" } },
+      { id: "ch_proteger_13", title: "Je protège l'information en mobilité", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("proteger", 13), alt: "Je protège l'information en mobilité" } },
+      { id: "ch_proteger_14", title: "Je fais attention aux photos et captures", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("proteger", 14), alt: "Je fais attention aux photos et captures" } },
+      { id: "ch_proteger_15", title: "Je maîtrise les versions", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("proteger", 15), alt: "Je maîtrise les versions" } },
+      { id: "ch_proteger_16", title: "Je détruis correctement ce qui n'est plus utile", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("proteger", 16), alt: "Je détruis correctement ce qui n'est plus utile" } },
+      { id: "ch_proteger_17", title: "Je demande avant d'agir", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("proteger", 17), alt: "Je demande avant d'agir" } },
+      { id: "ch_proteger_18", title: "Les réflexes qui protègent l'information", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("proteger", 18), alt: "Les réflexes qui protègent l'information" } },
+    ],
+    quiz: { id: "quiz_proteger", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  SOCLE COMMUN - Module 6 : Ransomware et réflexes incidents
+  // ----------------------------------------------------------
+  mod_ransomware: {
+    id: "mod_ransomware",
+    slug: "ransomware",
+    title: "Ransomware et réflexes incidents",
+    description:
+      "Comprendre ce qu'est un ransomware, reconnaître les premiers signes et appliquer les bons réflexes immédiats : s'arrêter, isoler, signaler.",
+    imageUrl: img("ransomware", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_ransomware_1", title: "Ransomware & réflexes incident", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("ransomware", 1), alt: "Ransomware et réflexes incident" } },
+      { id: "ch_ransomware_2", title: "Pourquoi SGTM doit se préparer", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("ransomware", 2), alt: "Pourquoi SGTM doit se préparer" } },
+      { id: "ch_ransomware_3", title: "Qu'est-ce qu'un ransomware", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("ransomware", 3), alt: "Qu'est-ce qu'un ransomware" } },
+      { id: "ch_ransomware_4", title: "Comment un ransomware peut entrer", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("ransomware", 4), alt: "Comment un ransomware peut entrer" } },
+      { id: "ch_ransomware_5", title: "Ce qu'il fait une fois entré", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("ransomware", 5), alt: "Ce qu'il fait une fois entré" } },
+      { id: "ch_ransomware_6", title: "Reconnaître les premiers signes", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("ransomware", 6), alt: "Reconnaître les premiers signes" } },
+      { id: "ch_ransomware_7", title: "Réflexe immédiat - je m'arrête", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("ransomware", 7), alt: "Réflexe immédiat, je m'arrête" } },
+      { id: "ch_ransomware_8", title: "Réflexe immédiat - j'isole si possible", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("ransomware", 8), alt: "Réflexe immédiat, j'isole si possible" } },
+      { id: "ch_ransomware_9", title: "Réflexe immédiat - je signale vite", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("ransomware", 9), alt: "Réflexe immédiat, je signale vite" } },
+      { id: "ch_ransomware_10", title: "Ce que je ne fais surtout pas", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("ransomware", 10), alt: "Ce que je ne fais surtout pas" } },
+      { id: "ch_ransomware_11", title: "Je préserve les éléments utiles", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("ransomware", 11), alt: "Je préserve les éléments utiles" } },
+      { id: "ch_ransomware_12", title: "Un incident ne concerne pas qu'un seul poste", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("ransomware", 12), alt: "Un incident ne concerne pas qu'un seul poste" } },
+      { id: "ch_ransomware_13", title: "Les sauvegardes font la différence", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("ransomware", 13), alt: "Les sauvegardes font la différence" } },
+      { id: "ch_ransomware_14", title: "Après l'alerte, je reste vigilant", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("ransomware", 14), alt: "Après l'alerte, je reste vigilant" } },
+      { id: "ch_ransomware_15", title: "Cas pratique - une pièce jointe urgente", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("ransomware", 15), alt: "Cas pratique, une pièce jointe urgente" } },
+      { id: "ch_ransomware_16", title: "Cas pratique - des fichiers chantier deviennent illisibles", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("ransomware", 16), alt: "Cas pratique, des fichiers chantier deviennent illisibles" } },
+      { id: "ch_ransomware_17", title: "J'ai cliqué - je le dis tout de suite", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("ransomware", 17), alt: "J'ai cliqué, je le dis tout de suite" } },
+      { id: "ch_ransomware_18", title: "Les 4 réflexes à retenir", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("ransomware", 18), alt: "Les 4 réflexes à retenir" } },
+    ],
+    quiz: { id: "quiz_ransomware", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ==========================================================
+  //  MODULES CIBLÉS
+  // ==========================================================
+
+  // ----------------------------------------------------------
+  //  CIBLÉ - Fraude aux virements (FOVI)   → Finance, Achats
+  // ----------------------------------------------------------
+  mod_fovi: {
+    id: "mod_fovi",
+    slug: "fovi",
+    title: "Fraude aux virements (FOVI)",
+    description:
+      "Reconnaître les tentatives de fraude au virement (faux dirigeant, faux fournisseur, faux RIB), vérifier chaque demande de paiement et réagir vite en cas de doute.",
+    imageUrl: img("fovi", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_fovi_1", title: "La fraude au virement menace directement SGTM", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("fovi", 1), alt: "La fraude au virement menace directement SGTM" } },
+      { id: "ch_fovi_2", title: "Qu'est-ce qu'une fraude au virement (FOVI)", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("fovi", 2), alt: "Qu'est-ce qu'une fraude au virement (FOVI)" } },
+      { id: "ch_fovi_3", title: "Une demande urgente du dirigeant - je vérifie", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("fovi", 3), alt: "Une demande urgente du dirigeant, je vérifie" } },
+      { id: "ch_fovi_4", title: "Faux fournisseur, faux RIB - je contrôle", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("fovi", 4), alt: "Faux fournisseur, faux RIB, je contrôle" } },
+      { id: "ch_fovi_5", title: "Un faux conseiller bancaire m'appelle - je me méfie", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("fovi", 5), alt: "Un faux conseiller bancaire m'appelle, je me méfie" } },
+      { id: "ch_fovi_6", title: "Je reconnais les signaux d'une FOVI", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("fovi", 6), alt: "Je reconnais les signaux d'une FOVI" } },
+      { id: "ch_fovi_7", title: "Je vérifie toute demande de virement ou de RIB", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("fovi", 7), alt: "Je vérifie toute demande de virement ou de RIB" } },
+      { id: "ch_fovi_8", title: "Je respecte le circuit de validation des paiements", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("fovi", 8), alt: "Je respecte le circuit de validation des paiements" } },
+      { id: "ch_fovi_9", title: "En cas de doute sur un paiement, je signale", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("fovi", 9), alt: "En cas de doute sur un paiement, je signale" } },
+      { id: "ch_fovi_10", title: "Le virement est parti - je réagis vite", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("fovi", 10), alt: "Le virement est parti, je réagis vite" } },
+      { id: "ch_fovi_11", title: "Cas pratique - Changement de RIB fournisseur", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("fovi", 11), alt: "Cas pratique, changement de RIB fournisseur" } },
+      { id: "ch_fovi_12", title: "Cas pratique - Email du DG, virement urgent confidentiel", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("fovi", 12), alt: "Cas pratique, email du DG virement urgent confidentiel" } },
+      { id: "ch_fovi_13", title: "Mes réflexes anti-FOVI", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("fovi", 13), alt: "Mes réflexes anti-FOVI" } },
+      { id: "ch_fovi_14", title: "FOVI - Reconnaître, vérifier et réagir", order: 14, contentType: "video", fileIndex: 14, durationSeconds: 300, body: { provider: "local", src: "/content/fovi/14.mp4" } },
+    ],
+    quiz: { id: "quiz_fovi", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  CIBLÉ - Sous-traitants & tiers   → Achats, Conducteurs
+  // ----------------------------------------------------------
+  mod_sous_traitants: {
+    id: "mod_sous_traitants",
+    slug: "sous_traitants",
+    title: "Sous-traitants & tiers",
+    description:
+      "Collaborer en sécurité avec les sous-traitants et tiers : vérifier avant de collaborer, partager le strict nécessaire, et réagir en cas d'incident.",
+    imageUrl: img("sous_traitants", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_sous_traitants_1", title: "Pourquoi les sous-traitants et tiers sont concernés", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 1), alt: "Pourquoi les sous-traitants et tiers sont concernés" } },
+      { id: "ch_sous_traitants_2", title: "Un maillon externe peut devenir une faiblesse", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 2), alt: "Un maillon externe peut devenir une faiblesse" } },
+      { id: "ch_sous_traitants_3", title: "Des règles claires pour travailler ensemble", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 3), alt: "Des règles claires pour travailler ensemble" } },
+      { id: "ch_sous_traitants_4", title: "Je vérifie avant de collaborer", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 4), alt: "Je vérifie avant de collaborer" } },
+      { id: "ch_sous_traitants_5", title: "Le strict nécessaire, seulement", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 5), alt: "Le strict nécessaire, seulement" } },
+      { id: "ch_sous_traitants_6", title: "Je partage avec les tiers avec précaution", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 6), alt: "Je partage avec les tiers avec précaution" } },
+      { id: "ch_sous_traitants_7", title: "Je m'assure que les règles sont suivies", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 7), alt: "Je m'assure que les règles sont suivies" } },
+      { id: "ch_sous_traitants_8", title: "En cas d'incident, je réagis vite", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 8), alt: "En cas d'incident, je réagis vite" } },
+      { id: "ch_sous_traitants_9", title: "Je clôture proprement", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 9), alt: "Je clôture proprement" } },
+      { id: "ch_sous_traitants_10", title: "Mes réflexes avec les sous-traitants et tiers", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("sous_traitants", 10), alt: "Mes réflexes avec les sous-traitants et tiers" } },
+    ],
+    quiz: { id: "quiz_sous_traitants", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  CIBLÉ - CNDP & données personnelles   → RH, Admin
+  // ----------------------------------------------------------
+  mod_cndp: {
+    id: "mod_cndp",
+    slug: "cndp",
+    title: "CNDP & données personnelles",
+    description:
+      "Protéger les données personnelles au quotidien : ne collecter que l'utile, partager avec les bonnes personnes, respecter les droits et réagir en cas de violation.",
+    imageUrl: img("cndp", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_cndp_1", title: "Protéger les données personnelles", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("cndp", 1), alt: "Protéger les données personnelles" } },
+      { id: "ch_cndp_2", title: "Qu'est-ce qu'une donnée personnelle", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("cndp", 2), alt: "Qu'est-ce qu'une donnée personnelle" } },
+      { id: "ch_cndp_3", title: "Où trouve-t-on les données personnelles", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("cndp", 3), alt: "Où trouve-t-on les données personnelles" } },
+      { id: "ch_cndp_4", title: "Pourquoi les protéger", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("cndp", 4), alt: "Pourquoi les protéger" } },
+      { id: "ch_cndp_5", title: "Je collecte seulement l'utile", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("cndp", 5), alt: "Je collecte seulement l'utile" } },
+      { id: "ch_cndp_6", title: "Je partage seulement avec les bonnes personnes", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("cndp", 6), alt: "Je partage seulement avec les bonnes personnes" } },
+      { id: "ch_cndp_7", title: "Je choisis le bon canal", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("cndp", 7), alt: "Je choisis le bon canal" } },
+      { id: "ch_cndp_8", title: "J'imprime, je range et je détruis avec prudence", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("cndp", 8), alt: "J'imprime, je range et je détruis avec prudence" } },
+      { id: "ch_cndp_9", title: "J'utilise les données pour un objectif clair", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("cndp", 9), alt: "J'utilise les données pour un objectif clair" } },
+      { id: "ch_cndp_10", title: "Je garde des données exactes et à jour", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("cndp", 10), alt: "Je garde des données exactes et à jour" } },
+      { id: "ch_cndp_11", title: "Je conserve seulement le temps nécessaire", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("cndp", 11), alt: "Je conserve seulement le temps nécessaire" } },
+      { id: "ch_cndp_12", title: "Certaines données demandent plus de vigilance", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("cndp", 12), alt: "Certaines données demandent plus de vigilance" } },
+      { id: "ch_cndp_13", title: "Les personnes ont des droits sur leurs données", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("cndp", 13), alt: "Les personnes ont des droits sur leurs données" } },
+      { id: "ch_cndp_14", title: "En cas de violation ou de doute, je réagis vite", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("cndp", 14), alt: "En cas de violation ou de doute, je réagis vite" } },
+      { id: "ch_cndp_15", title: "Mes réflexes CNDP au quotidien", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("cndp", 15), alt: "Mes réflexes CNDP au quotidien" } },
+    ],
+    quiz: { id: "quiz_cndp", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  CIBLÉ - Classification & études de prix   → BE, Commerce
+  // ----------------------------------------------------------
+  mod_classification: {
+    id: "mod_classification",
+    slug: "classification",
+    title: "Classification & études de prix",
+    description:
+      "Classer et protéger l'information sensible (études de prix, marges) : marquer, ranger, partager selon le besoin d'en connaître et maîtriser les versions.",
+    imageUrl: img("classification", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_classification_1", title: "Classification & étude des prix", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("classification", 1), alt: "Classification et étude des prix" } },
+      { id: "ch_classification_2", title: "Pourquoi classifier l'information", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("classification", 2), alt: "Pourquoi classifier l'information" } },
+      { id: "ch_classification_3", title: "Qu'est-ce qu'une étude de prix sensible", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("classification", 3), alt: "Qu'est-ce qu'une étude de prix sensible" } },
+      { id: "ch_classification_4", title: "Les niveaux de classification", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("classification", 4), alt: "Les niveaux de classification" } },
+      { id: "ch_classification_5", title: "Quels documents sont sensibles", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("classification", 5), alt: "Quels documents sont sensibles" } },
+      { id: "ch_classification_6", title: "Marquer, nommer et ranger correctement", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("classification", 6), alt: "Marquer, nommer et ranger correctement" } },
+      { id: "ch_classification_7", title: "Partager selon le besoin d'en connaître", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("classification", 7), alt: "Partager selon le besoin d'en connaître" } },
+      { id: "ch_classification_8", title: "Vérifier avant d'envoyer", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("classification", 8), alt: "Vérifier avant d'envoyer" } },
+      { id: "ch_classification_9", title: "Réunions, impressions et papier", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("classification", 9), alt: "Réunions, impressions et papier" } },
+      { id: "ch_classification_10", title: "Les erreurs à éviter", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("classification", 10), alt: "Les erreurs à éviter" } },
+      { id: "ch_classification_11", title: "Partager à l'extérieur avec prudence", order: 11, contentType: "infographic", fileIndex: 11, durationSeconds: 120, body: { imageUrl: img("classification", 11), alt: "Partager à l'extérieur avec prudence" } },
+      { id: "ch_classification_12", title: "Vérifier le bon destinataire", order: 12, contentType: "infographic", fileIndex: 12, durationSeconds: 120, body: { imageUrl: img("classification", 12), alt: "Vérifier le bon destinataire" } },
+      { id: "ch_classification_13", title: "Maîtriser les versions", order: 13, contentType: "infographic", fileIndex: 13, durationSeconds: 120, body: { imageUrl: img("classification", 13), alt: "Maîtriser les versions" } },
+      { id: "ch_classification_14", title: "Utiliser les espaces autorisés", order: 14, contentType: "infographic", fileIndex: 14, durationSeconds: 120, body: { imageUrl: img("classification", 14), alt: "Utiliser les espaces autorisés" } },
+      { id: "ch_classification_15", title: "Protéger l'information en mobilité", order: 15, contentType: "infographic", fileIndex: 15, durationSeconds: 120, body: { imageUrl: img("classification", 15), alt: "Protéger l'information en mobilité" } },
+      { id: "ch_classification_16", title: "En cas de doute, je demande", order: 16, contentType: "infographic", fileIndex: 16, durationSeconds: 120, body: { imageUrl: img("classification", 16), alt: "En cas de doute, je demande" } },
+      { id: "ch_classification_17", title: "Si une erreur arrive, je signale vite", order: 17, contentType: "infographic", fileIndex: 17, durationSeconds: 120, body: { imageUrl: img("classification", 17), alt: "Si une erreur arrive, je signale vite" } },
+      { id: "ch_classification_18", title: "Les réflexes essentiels à retenir", order: 18, contentType: "infographic", fileIndex: 18, durationSeconds: 120, body: { imageUrl: img("classification", 18), alt: "Les réflexes essentiels à retenir" } },
+    ],
+    quiz: { id: "quiz_classification", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+
+  // ----------------------------------------------------------
+  //  CIBLÉ - Dirigeants & cadres exposés   → Direction
+  // ----------------------------------------------------------
+  mod_dirigeants: {
+    id: "mod_dirigeants",
+    slug: "dirigeants",
+    title: "Dirigeants & cadres exposés",
+    description:
+      "Les dirigeants et cadres sont des cibles privilégiées : attaques personnalisées, forte exposition. Protéger ce qui ne doit pas sortir et sécuriser ses accès.",
+    imageUrl: img("dirigeants", 1),
+    readingTimerSeconds: 180,
+    chapters: [
+      { id: "ch_dirigeants_1", title: "Pourquoi les dirigeants et cadres sont ciblés", order: 1, contentType: "infographic", fileIndex: 1, durationSeconds: 120, body: { imageUrl: img("dirigeants", 1), alt: "Pourquoi les dirigeants et cadres sont ciblés" } },
+      { id: "ch_dirigeants_2", title: "Des attaques préparées et personnalisées", order: 2, contentType: "infographic", fileIndex: 2, durationSeconds: 120, body: { imageUrl: img("dirigeants", 2), alt: "Des attaques préparées et personnalisées" } },
+      { id: "ch_dirigeants_3", title: "Visibilité élevée, exposition forte", order: 3, contentType: "infographic", fileIndex: 3, durationSeconds: 120, body: { imageUrl: img("dirigeants", 3), alt: "Visibilité élevée, exposition forte" } },
+      { id: "ch_dirigeants_4", title: "Je protège ce qui ne doit pas sortir", order: 4, contentType: "infographic", fileIndex: 4, durationSeconds: 120, body: { imageUrl: img("dirigeants", 4), alt: "Je protège ce qui ne doit pas sortir" } },
+      { id: "ch_dirigeants_5", title: "Mes gestes font la différence", order: 5, contentType: "infographic", fileIndex: 5, durationSeconds: 120, body: { imageUrl: img("dirigeants", 5), alt: "Mes gestes font la différence" } },
+      { id: "ch_dirigeants_6", title: "Des échanges sécurisés, toujours", order: 6, contentType: "infographic", fileIndex: 6, durationSeconds: 120, body: { imageUrl: img("dirigeants", 6), alt: "Des échanges sécurisés, toujours" } },
+      { id: "ch_dirigeants_7", title: "En déplacement, je reste vigilant", order: 7, contentType: "infographic", fileIndex: 7, durationSeconds: 120, body: { imageUrl: img("dirigeants", 7), alt: "En déplacement, je reste vigilant" } },
+      { id: "ch_dirigeants_8", title: "Des accès forts et maîtrisés", order: 8, contentType: "infographic", fileIndex: 8, durationSeconds: 120, body: { imageUrl: img("dirigeants", 8), alt: "Des accès forts et maîtrisés" } },
+      { id: "ch_dirigeants_9", title: "En cas de doute ou d'incident, je signale", order: 9, contentType: "infographic", fileIndex: 9, durationSeconds: 120, body: { imageUrl: img("dirigeants", 9), alt: "En cas de doute ou d'incident, je signale" } },
+      { id: "ch_dirigeants_10", title: "Mes réflexes de dirigeant ou cadre exposé", order: 10, contentType: "infographic", fileIndex: 10, durationSeconds: 120, body: { imageUrl: img("dirigeants", 10), alt: "Mes réflexes de dirigeant ou cadre exposé" } },
+    ],
+    quiz: { id: "quiz_dirigeants", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
+  },
+};
+
+// ============================================================
+//  DÉPARTEMENTS (ne portent que des références moduleIds)
+// ============================================================
+// Socle commun : 6 modules vus par TOUS les employés connectés.
+// Défini une fois, réutilisé dans chaque département via le spread `...COMMON`.
+const COMMON = [
+  "mod_accueil",
+  "mod_culture",
+  "mod_phishing",
+  "mod_mdp_mfa",
+  "mod_proteger",
+  "mod_ransomware",
+];
+
+// Gabarit du test final (identique pour chaque département).
+// `id` reconstruit par département : test_<suffixe de dep_*>.
+const testFor = (deptId) => ({
+  id: `test_${deptId.replace("dep_", "")}`,
+  questionCount: 15,
+  passThreshold: 80,
+  timerSeconds: 1800,
+  maxAttemptsPerDay: 3,
+});
+
 export const departments = [
+  // -- Socle commun seul (département "général", vu par défaut) --
   {
     id: "dep_general",
-    name: "Général",
-    modules: [
-      {
-        id: "mod_gen_1",
-        title: "Phishing et ingénierie sociale",
-        description:
-          "Reconnaître les tentatives de phishing et d'ingénierie sociale, adopter les bons réflexes de vérification et savoir réagir en cas de doute.",
-        imageUrl: phishingImages[0],
-        order: 1,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_gen_1_1", title: "Pourquoi SGTM est concernée", order: 1, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[0], alt: "Pourquoi SGTM est concernée" }
-          },
-          {
-            id: "ch_gen_1_2", title: "Qu'est-ce que le phishing ?", order: 2, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[1], alt: "Qu'est-ce que le phishing" }
-          },
-          {
-            id: "ch_gen_1_3", title: "Qu'est-ce que l'ingénierie sociale ?", order: 3, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[2], alt: "Qu'est-ce que l'ingénierie sociale" }
-          },
-          {
-            id: "ch_gen_1_4", title: "L'email de phishing", order: 4, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[3], alt: "L'email de phishing" }
-          },
-          {
-            id: "ch_gen_1_5", title: "Spear-phishing et usurpation", order: 5, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[4], alt: "Spear-phishing et usurpation" }
-          },
-          {
-            id: "ch_gen_1_6", title: "Smishing et messageries", order: 6, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[5], alt: "Smishing et messageries" }
-          },
-          {
-            id: "ch_gen_1_7", title: "Vishing et faux support", order: 7, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[6], alt: "Vishing et faux support" }
-          },
-          {
-            id: "ch_gen_1_8", title: "Vérifier l'expéditeur", order: 8, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[7], alt: "Vérifier l'expéditeur" }
-          },
-          {
-            id: "ch_gen_1_9", title: "Contrôler le lien et la pièce jointe", order: 9, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[8], alt: "Contrôler le lien et la pièce jointe" }
-          },
-          {
-            id: "ch_gen_1_10", title: "Reconnaître l'urgence et la manipulation", order: 10, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[9], alt: "Reconnaître l'urgence et la manipulation" }
-          },
-          {
-            id: "ch_gen_1_11", title: "Le réflexe des 10 secondes", order: 11, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[10], alt: "Le réflexe des 10 secondes" }
-          },
-          {
-            id: "ch_gen_1_12", title: "Vérifier par un autre canal", order: 12, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[11], alt: "Vérifier par un autre canal" }
-          },
-          {
-            id: "ch_gen_1_13", title: "Ce que je ne partage jamais", order: 13, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[12], alt: "Ce que je ne partage jamais" }
-          },
-          {
-            id: "ch_gen_1_14", title: "Cas SGTM — Faux changement de RIB", order: 14, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[13], alt: "Cas SGTM, faux changement de RIB" }
-          },
-          {
-            id: "ch_gen_1_15", title: "Cas SGTM — Faux lien vers un dossier chantier", order: 15, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[14], alt: "Cas SGTM, faux lien vers un dossier chantier" }
-          },
-          {
-            id: "ch_gen_1_16", title: "J'ai cliqué ou répondu : que faire ?", order: 16, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[15], alt: "J'ai cliqué ou répondu, que faire" }
-          },
-          {
-            id: "ch_gen_1_17", title: "Le bon réflexe à retenir", order: 17, contentType: "infographic", durationSeconds: 120,
-            body: { imageUrl: phishingImages[16], alt: "Le bon réflexe à retenir" }
-          },
-          {
-            id: "ch_gen_1_18", title: "SGTM TEST VIDEO", order: 18, contentType: "video", durationSeconds: 300,
-            body: { provider: "local", src: phishingVideo }
-          },
-        ],
-        quiz: {
-          id: "quiz_gen_1",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      }
-    ],
-    test: {
-      id: "test_general",
-      questionCount: 15,
-      passThreshold: 80,
-      timerSeconds: 1800,
-      maxAttemptsPerDay: 3,
-    },
+    name: "Socle commun",
+    isCommon: true,
+    moduleIds: [...COMMON],
+    test: testFor("dep_general"),
+  },
+
+  // -- Départements métier : socle commun + module(s) ciblé(s) --
+  {
+    id: "dep_finance",
+    name: "Finance",
+    moduleIds: ["mod_fovi"],
+    test: testFor("dep_finance"),
   },
   {
-    id: "dep_hr",
+    id: "dep_achats",
+    name: "Achats",
+    moduleIds: ["mod_fovi", "mod_sous_traitants"],
+    test: testFor("dep_achats"),
+  },
+  {
+    id: "dep_conducteurs",
+    name: "Conducteurs",
+    moduleIds: ["mod_sous_traitants"],
+    test: testFor("dep_conducteurs"),
+  },
+  {
+    id: "dep_rh",
     name: "Ressources Humaines",
-    modules: [
-      {
-        id: "mod_hr_1",
-        title: "Protection des données personnelles des employés",
-        description:
-          "Comprenez vos obligations légales et éthiques dans le traitement des données RH confidentielles et apprenez à prévenir les fuites d'informations sensibles.",
-        imageUrl:
-          "https://images.unsplash.com/photo-1450101499163-c8848c66ca85",
-        order: 1,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_1_1",
-            title: "Quelles sont les données RH sensibles",
-            order: 1,
-            contentType: "article",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_1_2",
-            title: "Obligations légales de confidentialité",
-            order: 2,
-            contentType: "video",
-            durationSeconds: 360,
-          },
-          {
-            id: "ch_hr_1_3",
-            title: "Cycle de vie des données employé",
-            order: 3,
-            contentType: "infographic",
-            durationSeconds: 210,
-          },
-          {
-            id: "ch_hr_1_4",
-            title: "Partage sécurisé des informations RH",
-            order: 4,
-            contentType: "article",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_1_5",
-            title: "Destruction sécurisée des documents papier",
-            order: 5,
-            contentType: "pdf",
-            durationSeconds: 180,
-          },
-          {
-            id: "ch_hr_1_6",
-            title: "Procédure en cas de violation de données",
-            order: 6,
-            contentType: "link",
-            durationSeconds: 300,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_1",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-      {
-        id: "mod_hr_2",
-        title: "Sensibilisation au phishing ciblant les RH",
-        description:
-          "Identifiez les attaques de phishing spécifiquement conçues pour le département RH, comme les faux CV, fausses candidatures et demandes de modification de coordonnées bancaires.",
-        imageUrl:
-          "https://images.unsplash.com/photo-1434030216411-0b793f4b4173",
-        order: 2,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_2_1",
-            title: "Pourquoi les RH sont une cible privilégiée",
-            order: 1,
-            contentType: "article",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_2_2",
-            title: "Faux CV et pièces jointes malveillantes",
-            order: 2,
-            contentType: "video",
-            durationSeconds: 330,
-          },
-          {
-            id: "ch_hr_2_3",
-            title: "Fraude au changement de RIB",
-            order: 3,
-            contentType: "infographic",
-            durationSeconds: 210,
-          },
-          {
-            id: "ch_hr_2_4",
-            title: "Vérification des demandes de modification de données",
-            order: 4,
-            contentType: "article",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_2_5",
-            title: "Processus de validation interne",
-            order: 5,
-            contentType: "pdf",
-            durationSeconds: 300,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_2",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-      {
-        id: "mod_hr_3",
-        title: "Sécurité du recrutement en ligne",
-        description:
-          "Sécurisez l'ensemble du processus de recrutement numérique, de la réception des candidatures à la collecte de documents d'identité, en passant par les entretiens vidéo.",
-        imageUrl:
-          "https://images.unsplash.com/photo-1521737711867-e3b97375f902",
-        order: 3,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_3_1",
-            title: "Risques liés aux plateformes de recrutement",
-            order: 1,
-            contentType: "article",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_3_2",
-            title: "Vérification de l'authenticité des candidats",
-            order: 2,
-            contentType: "video",
-            durationSeconds: 300,
-          },
-          {
-            id: "ch_hr_3_3",
-            title: "Sécuriser les entretiens vidéo",
-            order: 3,
-            contentType: "infographic",
-            durationSeconds: 180,
-          },
-          {
-            id: "ch_hr_3_4",
-            title: "Collecte et stockage des pièces justificatives",
-            order: 4,
-            contentType: "pdf",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_3_5",
-            title: "Durée de conservation des données candidats",
-            order: 5,
-            contentType: "link",
-            durationSeconds: 210,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_3",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-      {
-        id: "mod_hr_4",
-        title: "Sécurité physique et politique de bureau propre",
-        description:
-          "Appliquez les règles de sécurité physique au bureau, y compris la politique de bureau propre, le contrôle d'accès aux locaux et la protection contre les regards indiscrets.",
-        imageUrl:
-          "https://images.unsplash.com/photo-1497366754270-5e90d6c3aab0",
-        order: 4,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_4_1",
-            title: "La politique de bureau propre expliquée",
-            order: 1,
-            contentType: "article",
-            durationSeconds: 210,
-          },
-          {
-            id: "ch_hr_4_2",
-            title: "Gestion des visiteurs et badges d'accès",
-            order: 2,
-            contentType: "video",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_4_3",
-            title: "Protection contre le shoulder surfing",
-            order: 3,
-            contentType: "infographic",
-            durationSeconds: 150,
-          },
-          {
-            id: "ch_hr_4_4",
-            title: "Sécurisation des documents imprimés",
-            order: 4,
-            contentType: "article",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_4_5",
-            title: "Verrouillage systématique des postes de travail",
-            order: 5,
-            contentType: "pdf",
-            durationSeconds: 180,
-          },
-          {
-            id: "ch_hr_4_6",
-            title: "Procédure d'accueil des prestataires externes",
-            order: 6,
-            contentType: "link",
-            durationSeconds: 300,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_4",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-      {
-        id: "mod_hr_5",
-        title: "Formation continue et culture de sécurité",
-        description:
-          "Développez et maintenez une culture de sécurité solide au sein de l'organisation grâce à des programmes de formation continue et des campagnes de sensibilisation efficaces.",
-        imageUrl:
-          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655",
-        order: 5,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_5_1",
-            title: "Pourquoi la formation continue est essentielle",
-            order: 1,
-            contentType: "article",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_5_2",
-            title: "Concevoir un programme de sensibilisation",
-            order: 2,
-            contentType: "video",
-            durationSeconds: 360,
-          },
-          {
-            id: "ch_hr_5_3",
-            title: "Indicateurs de succès d'une campagne",
-            order: 3,
-            contentType: "infographic",
-            durationSeconds: 180,
-          },
-          {
-            id: "ch_hr_5_4",
-            title: "Gestion des comportements à risque",
-            order: 4,
-            contentType: "article",
-            durationSeconds: 300,
-          },
-          {
-            id: "ch_hr_5_5",
-            title: "Simulations de phishing internes",
-            order: 5,
-            contentType: "pdf",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_5_6",
-            title: "Ressources et référentiels utiles",
-            order: 6,
-            contentType: "link",
-            durationSeconds: 210,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_5",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-      {
-        id: "mod_hr_6",
-        title: "Départ d'un employé et révocation des accès",
-        description:
-          "Maîtrisez les procédures de départ sécurisé, incluant la révocation immédiate des accès numériques, la récupération du matériel et la gestion des données résiduelles.",
-        imageUrl: "https://images.unsplash.com/photo-1553877522-43269d4ea984",
-        order: 6,
-        readingTimerSeconds: 180,
-        chapters: [
-          {
-            id: "ch_hr_6_1",
-            title: "Checklist de départ sécurisé",
-            order: 1,
-            contentType: "pdf",
-            durationSeconds: 240,
-          },
-          {
-            id: "ch_hr_6_2",
-            title: "Révocation des comptes et accès",
-            order: 2,
-            contentType: "article",
-            durationSeconds: 270,
-          },
-          {
-            id: "ch_hr_6_3",
-            title: "Récupération du matériel informatique",
-            order: 3,
-            contentType: "video",
-            durationSeconds: 300,
-          },
-          {
-            id: "ch_hr_6_4",
-            title: "Conservation légale des données après départ",
-            order: 4,
-            contentType: "infographic",
-            durationSeconds: 180,
-          },
-          {
-            id: "ch_hr_6_5",
-            title: "Menace interne et départ conflictuel",
-            order: 5,
-            contentType: "article",
-            durationSeconds: 330,
-          },
-          {
-            id: "ch_hr_6_6",
-            title: "Coordination avec le service informatique",
-            order: 6,
-            contentType: "link",
-            durationSeconds: 210,
-          },
-        ],
-        quiz: {
-          id: "quiz_hr_6",
-          questionCount: 5,
-          timerSeconds: 300,
-          passThreshold: 100,
-        },
-      },
-    ],
-    test: {
-      id: "test_hr",
-      questionCount: 15,
-      passThreshold: 80,
-      timerSeconds: 1800,
-      maxAttemptsPerDay: 3,
-    },
+    moduleIds: ["mod_cndp"],
+    test: testFor("dep_rh"),
+  },
+  {
+    id: "dep_admin",
+    name: "Administration",
+    moduleIds: ["mod_cndp"],
+    test: testFor("dep_admin"),
+  },
+  {
+    id: "dep_be",
+    name: "Bureau d'Études",
+    moduleIds: ["mod_classification"],
+    test: testFor("dep_be"),
+  },
+  {
+    id: "dep_commerce",
+    name: "Commerce",
+    moduleIds: ["mod_classification"],
+    test: testFor("dep_commerce"),
+  },
+  {
+    id: "dep_direction",
+    name: "Direction",
+    moduleIds: ["mod_dirigeants"],
+    test: testFor("dep_direction"),
   },
 ];
 
+// ============================================================
+//  DOCUMENTS SSI (communs)
+// ============================================================
 export const ssiDocuments = [
-  {
-    id: "ssi_1",
-    title: "Charte informatique",
-    docType: "pdf",
-    url: "/mock/sample-local-pdf.pdf",
-    order: 1,
-  },
-  {
-    id: "ssi_2",
-    title: "Politique de sécurité",
-    docType: "pdf",
-    url: "/mock/sample.pdf",
-    order: 2,
-  },
-  {
-    id: "ssi_3",
-    title: "Règlement d'usage des e-mails",
-    docType: "link",
-    url: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjL4NGnxouWAxXV1QIHHQUfE3AQFnoECBwQAQ&url=https%3A%2F%2Fpdfobject.com%2Fpdf%2Fsample.pdf&usg=AOvVaw3HWVVnyP33AitFrGydCfJ4&opi=89978449",
-    order: 3,
-  },
+  { id: "ssi_1", title: "Charte informatique", docType: "pdf", url: "/mock/sample-local-pdf.pdf", order: 1 },
+  { id: "ssi_2", title: "Politique de sécurité", docType: "pdf", url: "/mock/sample.pdf", order: 2 },
+  { id: "ssi_3", title: "Règlement d'usage des e-mails", docType: "link", url: "https://pdfobject.com/pdf/sample.pdf", order: 3 },
 ];
+
+// ============================================================
+//  HELPER : résoudre les modules d'un département
+//  (utilisé par api.js - remplace l'accès direct dep.modules)
+// ============================================================
+export function getDepartmentModules(dep) {
+  return dep.moduleIds.map((id) => modules[id]).filter(Boolean);
+}

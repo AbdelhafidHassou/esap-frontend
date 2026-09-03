@@ -57,8 +57,8 @@ export default function AdminLogin() {
             </button>
             <div className="w-full max-w-lg rounded-md border border-border bg-card/90 p-8 shadow-xl backdrop-blur-sm">
                 <div className="mb-8">
-                    <img src="/logos/mercure_logo.png" alt="Mercure" className="size-11 dark:hidden" />
-                    <img src="/logos/merlogo.png" alt="Mercure" className="size-11 hidden dark:block" />
+                    <img src="/logos/mercure_logo.png" alt="Mercure" className="size-22 dark:hidden" />
+                    <img src="/logos/merlogo.png" alt="Mercure" className="size-22 hidden dark:block" />
                     <h1 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
                         Administration Mercure
                     </h1>

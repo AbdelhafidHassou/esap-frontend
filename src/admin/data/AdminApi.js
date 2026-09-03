@@ -1,3 +1,6 @@
+import { clients } from "../mocks/clients";
+import { adminStats, clientStatusSplit, validationsPerMonth } from "../mocks/dashboard";
+
 const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
 const MOCK_EMAIL = "admin@mercure.one";
@@ -18,4 +21,14 @@ export async function adminLoginTotp(code) {
         return { success: true, token: "mock-admin-token" };
     }
     return { success: false, error: "invalid_code" };
+}
+
+export async function getAdminDashboard() {
+    await delay();
+    return {
+        stats: adminStats,
+        validationsPerMonth,
+        clientStatusSplit,
+        clients,
+    };
 }

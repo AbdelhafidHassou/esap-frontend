@@ -43,14 +43,9 @@ export default function AdminSidebar() {
                             className="bg-sidebar hover:bg-sidebar active:bg-sidebar data-active:bg-sidebar data-open:bg-sidebar cursor-default"
                         >
                             <img
-                                src="/logos/mercure_logo.png"
-                                alt={platform?.name}
-                                className="size-10 rounded-sm block dark:hidden"
-                            />
-                            <img
                                 src="/logos/merlogo.png"
                                 alt={platform?.name}
-                                className="size-10 rounded-sm hidden dark:block"
+                                className="size-10 rounded-sm block group-data-[collapsible=icon]:size-8"
                             />
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-medium text-sidebar-foreground">{platform?.name}</span>

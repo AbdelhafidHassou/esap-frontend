@@ -14,6 +14,7 @@ import {
   progressOverTime,
   quizzes,
   testBank,
+  modules,
 } from "@/mocks";
 
 const delay = (ms = 200) => new Promise((r) => setTimeout(r, ms));
@@ -65,10 +66,14 @@ function deriveFormationStatus({
   return "in_progress";
 }
 
+function resolveModules(dep) {
+  return (dep.moduleIds ?? []).map((id) => modules[id]).filter(Boolean);
+}
+
 function buildModules(dep) {
   let prevModuleComp = true;
 
-  return dep.modules.map((mod) => {
+  return resolveModules(dep).map((mod) => {
     const moduleUnlocked = prevModuleComp;
     const chapters = deriveChapterStatuses(mod.chapters, moduleUnlocked);
     const quizPassed = quizProgress[mod.quiz.id]?.passed ?? false;
@@ -147,24 +152,27 @@ export async function getFormationDetails(deptId) {
 }
 
 export function getFormationsView() {
-  return departments.map((dep) => {
-    const modules = buildModules(dep);
-    return {
-      department: { id: dep.id, name: dep.name },
-      modules: modules.map((mod) => ({
-        id: mod.id,
-        departmentId: dep.id,
-        title: mod.title,
-        description: mod.description,
-        chapterCount: mod.chapters.length,
-        durationMinutes: Math.ceil(
-          mod.chapters.reduce((sum, ch) => sum + ch.durationSeconds, 0) / 60,
-        ),
-        status: mod.status,
-        progressPercent: computeProgressPercent(mod),
-      })),
-    };
-  });
+  const mine = new Set(employee.departments);
+  return departments
+    .filter((dep) => mine.has(dep.id))
+    .map((dep) => {
+      const modules = buildModules(dep);
+      return {
+        department: { id: dep.id, name: dep.name },
+        modules: modules.map((mod) => ({
+          id: mod.id,
+          departmentId: dep.id,
+          title: mod.title,
+          description: mod.description,
+          chapterCount: mod.chapters.length,
+          durationMinutes: Math.ceil(
+            mod.chapters.reduce((sum, ch) => sum + ch.durationSeconds, 0) / 60,
+          ),
+          status: mod.status,
+          progressPercent: computeProgressPercent(mod),
+        })),
+      };
+    });
 }
 
 function computeProgressPercent(mod) {
@@ -185,9 +193,10 @@ export async function getBranding() {
 
 export async function getDashboard() {
   await delay();
+  const mine = departments.filter((d) => employee.departments.includes(d.id));
 
   const formationStatus = {};
-  for (const dep of departments) {
+  for (const dep of mine) {
     const detail = await getFormationDetailSync(dep.id);
     formationStatus[dep.id] = detail.department.status;
   }
@@ -195,8 +204,8 @@ export async function getDashboard() {
     stats: dashboardStats,
     riskScore,
     formationStatus,
-    departments: departments.map((d) => ({ id: d.id, name: d.name })),
-    formations: departments.map((d) => ({
+    departments: mine.map((d) => ({ id: d.id, name: d.name })),
+    formations: mine.map((d) => ({
       departmentId: d.id,
       departmentName: d.name,
       type: "Sensibilisation SSI",
@@ -261,7 +270,7 @@ export async function verifyOtp(email, code) {
 export async function getChapterContent(chapterId) {
   await delay();
   for (const dep of departments) {
-    for (const mod of dep.modules) {
+    for (const mod of resolveModules(dep)) {
       const ch = mod.chapters.find((c) => c.id === chapterId);
       if (ch) {
         return {
