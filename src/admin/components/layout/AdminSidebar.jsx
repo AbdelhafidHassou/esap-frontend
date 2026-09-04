@@ -1,7 +1,5 @@
 import {
-    LayoutDashboard, Users, FileStack, BarChart3,
-    UserPlus, Palette, ScrollText, Megaphone, Database, Activity,
-    UserCog, Settings,
+    LayoutDashboard, Users, FileStack, BarChart3, UserCog, Settings,
 } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -12,22 +10,12 @@ import {
 import { platform } from "@/mocks/platform";
 
 const items = [
-    // V1
     { title: "Dashboard", url: "/admin/dashboard", icon: LayoutDashboard },
     { title: "Clients", url: "/admin/clients", icon: Users },
     { title: "Contenu", url: "/admin/content", icon: FileStack },
     { title: "Rapports", url: "/admin/report", icon: BarChart3 },
-    // V1 placeholders
     { title: "Compte", url: "/admin/account", icon: UserCog },
     { title: "Paramètres", url: "/admin/settings", icon: Settings },
-    // V2
-    { title: "Employés", url: "/admin/employees", icon: UserPlus },
-    { title: "Personnalisation", url: "/admin/customization", icon: Palette },
-    // V3
-    { title: "Journal d'audit", url: "/admin/audit", icon: ScrollText },
-    { title: "Communication", url: "/admin/communication", icon: Megaphone },
-    { title: "Banque de questions", url: "/admin/question-bank", icon: Database },
-    { title: "Santé plateforme", url: "/admin/health", icon: Activity },
 ];
 
 export default function AdminSidebar() {
@@ -76,8 +64,8 @@ export default function AdminSidebar() {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="p-4 group-data-[collapsible=icon]:p-2">
-                <div className="flex flex-col items-center border-t pt-4">
-                    <p className="text-center text-xs text-foreground/70 group-data-[collapsible=icon]:hidden">
+                <div className="flex flex-col items-center border-t pt-4 group-data-[collapsible=icon]:hidden">
+                    <p className="text-center text-xs text-white">
                         © {platform?.year} {platform?.name}
                     </p>
                 </div>
