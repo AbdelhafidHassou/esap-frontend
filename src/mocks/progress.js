@@ -32,9 +32,9 @@ export const riskScore = {
 
 export const dashboardStats = {
   departmentsAssigned: 9,
-  totalModules: 11,
-  modulesValidated: 2,
-  modulesInProgress: 0,
+  totalModules: 20,
+  modulesValidated: 4,
+  modulesInProgress: 8,
 };
 
 export const progressOverTime = [
