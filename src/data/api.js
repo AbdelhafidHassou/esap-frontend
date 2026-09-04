@@ -452,7 +452,7 @@ export async function submitTest(testId, deptId, attemptNumber, answers) {
   if (!draw) return null;
 
   const perModule = {};
-  const results = {}; // { questionId: { correct, correctIds } }
+  const results = {}; 
   let totalCorrect = 0;
   let totalQuestions = 0;
 

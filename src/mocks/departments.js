@@ -1,9 +1,6 @@
 const img = (slug, n) => `/content/${slug}/${n}.jpg`;
 
 export const modules = {
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 1 : Accueil cyber (onboarding)
-  // ----------------------------------------------------------
   mod_accueil: {
     id: "mod_accueil",
     slug: "accueil",
@@ -35,9 +32,6 @@ export const modules = {
     quiz: { id: "quiz_accueil", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 2 : Culture SSI
-  // ----------------------------------------------------------
   mod_culture: {
     id: "mod_culture",
     slug: "culture",
@@ -69,9 +63,6 @@ export const modules = {
     quiz: { id: "quiz_culture", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 3 : Phishing et ingénierie sociale
-  // ----------------------------------------------------------
   mod_phishing: {
     id: "mod_phishing",
     slug: "phishing",
@@ -102,9 +93,6 @@ export const modules = {
     quiz: { id: "quiz_phishing", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 4 : Mot de passe et MFA
-  // ----------------------------------------------------------
   mod_mdp_mfa: {
     id: "mod_mdp_mfa",
     slug: "mdp_mfa",
@@ -136,9 +124,6 @@ export const modules = {
     quiz: { id: "quiz_mdp_mfa", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 5 : Protéger l'information
-  // ----------------------------------------------------------
   mod_proteger: {
     id: "mod_proteger",
     slug: "proteger",
@@ -170,9 +155,6 @@ export const modules = {
     quiz: { id: "quiz_proteger", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  SOCLE COMMUN - Module 6 : Ransomware et réflexes incidents
-  // ----------------------------------------------------------
   mod_ransomware: {
     id: "mod_ransomware",
     slug: "ransomware",
@@ -204,13 +186,6 @@ export const modules = {
     quiz: { id: "quiz_ransomware", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ==========================================================
-  //  MODULES CIBLÉS
-  // ==========================================================
-
-  // ----------------------------------------------------------
-  //  CIBLÉ - Fraude aux virements (FOVI)   → Finance, Achats
-  // ----------------------------------------------------------
   mod_fovi: {
     id: "mod_fovi",
     slug: "fovi",
@@ -238,9 +213,6 @@ export const modules = {
     quiz: { id: "quiz_fovi", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  CIBLÉ - Sous-traitants & tiers   → Achats, Conducteurs
-  // ----------------------------------------------------------
   mod_sous_traitants: {
     id: "mod_sous_traitants",
     slug: "sous_traitants",
@@ -264,9 +236,6 @@ export const modules = {
     quiz: { id: "quiz_sous_traitants", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  CIBLÉ - CNDP & données personnelles   → RH, Admin
-  // ----------------------------------------------------------
   mod_cndp: {
     id: "mod_cndp",
     slug: "cndp",
@@ -295,9 +264,6 @@ export const modules = {
     quiz: { id: "quiz_cndp", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  CIBLÉ - Classification & études de prix   → BE, Commerce
-  // ----------------------------------------------------------
   mod_classification: {
     id: "mod_classification",
     slug: "classification",
@@ -329,9 +295,6 @@ export const modules = {
     quiz: { id: "quiz_classification", questionCount: 5, timerSeconds: 300, passThreshold: 100 },
   },
 
-  // ----------------------------------------------------------
-  //  CIBLÉ - Dirigeants & cadres exposés   → Direction
-  // ----------------------------------------------------------
   mod_dirigeants: {
     id: "mod_dirigeants",
     slug: "dirigeants",
@@ -356,11 +319,6 @@ export const modules = {
   },
 };
 
-// ============================================================
-//  DÉPARTEMENTS (ne portent que des références moduleIds)
-// ============================================================
-// Socle commun : 6 modules vus par TOUS les employés connectés.
-// Défini une fois, réutilisé dans chaque département via le spread `...COMMON`.
 const COMMON = [
   "mod_accueil",
   "mod_culture",
@@ -370,8 +328,6 @@ const COMMON = [
   "mod_ransomware",
 ];
 
-// Gabarit du test final (identique pour chaque département).
-// `id` reconstruit par département : test_<suffixe de dep_*>.
 const testFor = (deptId) => ({
   id: `test_${deptId.replace("dep_", "")}`,
   questionCount: 15,
@@ -381,7 +337,6 @@ const testFor = (deptId) => ({
 });
 
 export const departments = [
-  // -- Socle commun seul (département "général", vu par défaut) --
   {
     id: "dep_general",
     name: "Socle commun",
@@ -390,7 +345,6 @@ export const departments = [
     test: testFor("dep_general"),
   },
 
-  // -- Départements métier : socle commun + module(s) ciblé(s) --
   {
     id: "dep_finance",
     name: "Finance",
@@ -441,19 +395,12 @@ export const departments = [
   },
 ];
 
-// ============================================================
-//  DOCUMENTS SSI (communs)
-// ============================================================
 export const ssiDocuments = [
   { id: "ssi_1", title: "Charte informatique", docType: "pdf", url: "/mock/sample-local-pdf.pdf", order: 1 },
   { id: "ssi_2", title: "Politique de sécurité", docType: "pdf", url: "/mock/sample.pdf", order: 2 },
   { id: "ssi_3", title: "Règlement d'usage des e-mails", docType: "link", url: "https://pdfobject.com/pdf/sample.pdf", order: 3 },
 ];
 
-// ============================================================
-//  HELPER : résoudre les modules d'un département
-//  (utilisé par api.js - remplace l'accès direct dep.modules)
-// ============================================================
 export function getDepartmentModules(dep) {
   return dep.moduleIds.map((id) => modules[id]).filter(Boolean);
 }

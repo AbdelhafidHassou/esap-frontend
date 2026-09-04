@@ -5,11 +5,11 @@ function StatCard({ label, value, subtitle, icon: Icon }) {
   return (
     <Card className="rounded-sm bg-card shadow-lg min-w-0">
       <CardContent className="flex items-start gap-4 p-5">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-sm bg-primary/10">
           <Icon className="h-6 w-6 text-primary" />
         </div>
         <div className="flex flex-col min-w-0">
-          <p className="text-muted-foreground text-xs">{label}</p>
+          <p className="text-foreground text-xs font-bold">{label}</p>
           <p className="text-2xl font-bold text-foreground">{value}</p>
           {subtitle && <p className="text-muted-foreground text-xs mt-1">{subtitle}</p>}
         </div>

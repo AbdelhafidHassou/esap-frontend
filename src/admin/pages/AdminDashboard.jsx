@@ -2,6 +2,7 @@ import { getAdminDashboard } from "@/admin/data/AdminApi";
 import { useAsync } from "@/hooks/useAsync";
 import { Skeleton } from "@/components/ui/skeleton";
 import StatsCards from "@/admin/components/dashboard/StatsCards";
+import ClientsTable from "../components/dashboard/ClientsTable";
 
 export default function AdminDashboard() {
   const { data, loading } = useAsync(getAdminDashboard);
@@ -19,7 +20,7 @@ export default function AdminDashboard() {
   return (
     <div className="w-full space-y-6">
       <StatsCards stats={data.stats} statusSplit={data.clientStatusSplit} />
-      {/* ClientsTable — data.clients */}
+      <ClientsTable clients={data.clients.slice(0, 5)} />
       {/* ValidationsChart — data.validationsPerMonth */}
       {/* ClientStatusDonut — data.clientStatusSplit */}
     </div>

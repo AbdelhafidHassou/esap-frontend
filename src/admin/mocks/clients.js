@@ -20,7 +20,7 @@ export const clients = [
     name: "Gamma Group",
     contact: { firstName: "Marc", lastName: "Leroy", email: "marc.leroy@gamma.com" },
     employeeCount: 150,
-    status: "active",
+    status: "inactif",
     createdAt: "2025-04-02",
   },
   {

@@ -3,7 +3,7 @@ import { adminStats, clientStatusSplit, validationsPerMonth } from "../mocks/das
 
 const delay = (ms = 300) => new Promise((r) => setTimeout(r, ms));
 
-const MOCK_EMAIL = "admin@mercure.one";
+const MOCK_EMAIL = "a@a.a";
 const MOCK_PASSWORD = "admin";
 const MOCK_TOTP = "12345678";
 
