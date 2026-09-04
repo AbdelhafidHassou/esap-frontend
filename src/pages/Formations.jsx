@@ -51,7 +51,7 @@ export default function Formations() {
           </div>
 
           {filtered.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground mt-4">
               Aucune formation dans cette catégorie.
             </p>
           ) : (
