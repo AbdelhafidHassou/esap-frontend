@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import StatsCards from "@/admin/components/dashboard/StatsCards";
 import ClientsTable from "../components/dashboard/ClientsTable";
 import ValidationsChart from "../components/dashboard/ValidationsChart";
+import ClientStatusDonut from "../components/dashboard/ClientStatusDonut";
 
 export default function AdminDashboard() {
   const { data, loading } = useAsync(getAdminDashboard);
@@ -22,8 +23,10 @@ export default function AdminDashboard() {
     <div className="w-full space-y-6">
       <StatsCards stats={data.stats} statusSplit={data.clientStatusSplit} />
       <ClientsTable clients={data.clients.slice(0, 5)} />
-      <ValidationsChart data={data.validationsPerMonth} />
-      {/* ClientStatusDonut — data.clientStatusSplit */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        <ValidationsChart data={data.validationsPerMonth} />
+        <ClientStatusDonut split={data.clientStatusSplit}/>
+      </div>
     </div>
   );
 }

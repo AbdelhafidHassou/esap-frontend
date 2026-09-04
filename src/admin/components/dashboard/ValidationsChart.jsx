@@ -37,7 +37,7 @@ export default function ValidationsChart({ data }) {
                   background: "var(--bg-surface)",
                 }}
               />
-              <Bar dataKey="count" fill={primary} radius={[4, 4, 0, 0]} maxBarSize={48} />
+              <Bar dataKey="count" name="Validations" fill={primary} radius={[4, 4, 0, 0]} maxBarSize={48} />
             </BarChart>
           </ResponsiveContainer>
         </div>
